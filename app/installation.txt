@@ -1,0 +1,32 @@
+1. react-native-fbsdk-next 
+    changes: 
+        ios: info.plist, appDelegate.mm
+        android: AndroidManifest.xml, strings.xml
+    
+2. react-native-splash-screen
+    changes: 
+        ios: info.plist, appDelegate.mm
+        android: AndroidManifest.xml,layout/launch_screen.xml, drawable
+
+3. @react-native-community/push-notification-ios
+    changes: 
+        ios: info.plist, appDelegate.mm
+
+4. native-firebase/app
+    changes: 
+        ios: appDelegate.mm, podfile, import googleservice-info.plist file using xcode
+    
+5. @react-native-google-signin/google-signin
+    changes: 
+        ios: build.gradle
+
+6: react-native-vision-camera
+    changes: 
+        ios: inside your project.pbxproj, find the GCC_PREPROCESSOR_DEFINITIONS group and add the flag
+        android: inside your gradle.properties file, add the disableFrameProcessors flag
+
+7. react-native-vector-icon
+    changes: check the documentation
+
+config may dipends: 
+    1. firebase setup, push notification, cloud messaging, @react-native-google-signin/google-signin

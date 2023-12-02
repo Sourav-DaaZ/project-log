@@ -1,0 +1,13 @@
+{
+  "name": "yarifi",
+  "displayName": "Time Track",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-2908974946217905~9812240099",
+    "ios_app_id": "ca-app-pub-2908974946217905~2718296241"
+  },
+  "plugins": [
+    "@react-native-firebase/app",
+    "@react-native-firebase/perf",
+    "@react-native-firebase/crashlytics"
+  ]
+}

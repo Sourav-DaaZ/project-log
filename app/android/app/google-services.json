@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "594622207776",
+    "project_id": "yarifi",
+    "storage_bucket": "yarifi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594622207776:android:58029347d0f852b619e945",
+        "android_client_info": {
+          "package_name": "com.yarifi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594622207776-4k4j17mbfdai5r3qmq0elfaa8tcvjooh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_tR6ncl6iK1ksk-MvIFw2_3PCvR_pDJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594622207776-4k4j17mbfdai5r3qmq0elfaa8tcvjooh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
