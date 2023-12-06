@@ -9,7 +9,7 @@ const ChipComponent = (props) => {
     const color = themeContext.colors[themeContext.baseColor];
     return (
         <Chip uppercased={false} {...props} labelStyle={[{ fontFamily: font.regular }, props.labelStyle]} contentStyle={[{ padding: spacing.height }, props.contentStyle]} style={[{ borderRadius: props.circular ? 30 : 5, backgroundColor: props.selected ? color.mainColor : color.borderColor }, props.style]} selectedColor={color.backgroundColor}>
-            <Text style={{ fontFamily: font.regular, color: props.selected ? color.backgroundColor : color.mainColor }}>
+            <Text style={{ fontFamily: font.regular, color: props.selected ? color.backgroundColor : props.color ? props.color : color.mainColor }}>
                 {props.children}
             </Text>
         </Chip>

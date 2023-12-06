@@ -27,7 +27,7 @@ export const StyledTitle = styled(Text)`
     font-family: ${(props) => props.theme.fontWeight.semiBold};
     font-size: ${(props) => props.theme.fonts.regular}px;
     margin-bottom: ${(props) => props.theme.spacing.height}px;
-    margin-top: ${(props) => props.theme.spacing.height * 3}px;
+    margin-top: ${(props) => props.theme.spacing.height }px;
 `;
 
 export const StyledError = styled(Text)`

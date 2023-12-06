@@ -15,6 +15,7 @@ const Routes = {
     search: 'Search',
     notification: 'Notification',
     setting: 'Setting',
+    applets: 'Applets',
     access: 'Access',
     login: 'Login',
     forgotPassword: 'ForgotPassword',

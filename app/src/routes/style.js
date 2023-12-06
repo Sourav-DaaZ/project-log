@@ -17,7 +17,6 @@ export const StyledHeaderView = styled(SafeAreaView)`
     flex-Direction: row;
     justify-content: space-between;
     box-shadow: none;
-    background-color: ${(props) => props.dark ? props.theme.colors[props.theme.baseColor].mainColor : props.theme.colors[props.theme.baseColor].backgroundColor};
 `;
 
 export const StyledEachHeaderView = styled(View)`
@@ -25,14 +24,13 @@ export const StyledEachHeaderView = styled(View)`
     flex-Direction: row;
     align-items: center;
     justify-content: center;
-    padding: ${(props) => props.theme.spacing.height}px ${(props) => props.theme.spacing.width}px;
+    padding: ${(props) => props.theme.spacing.height}px ${(props) => props.theme.spacing.width * 2}px;
     margin-right: ${(props) => props.theme.spacing.width}px;
     margin-bottom: ${(props) => props.theme.spacing.height}px;
 `;
 
 export const StyledCercularBorder = styled(View)`
     padding: ${(props) => props.theme.spacing.width * 4}px;
-    background-color: ${(props) => props.theme.colors[props.theme.baseColor].mainByColor};
     border-radius: ${(props) => props.theme.borderRedius.round}px;
 `;
 

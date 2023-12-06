@@ -308,16 +308,17 @@ const Login = props => {
             props.navigation.navigate(Routes.login);
           }}
         />
-        <Tabs
+        {/* <Tabs
           select={false}
           text="Register"
           onPress={() => {
             props.navigation.navigate(Routes.register);
           }}
-        />
+        /> */}
       </StyledViewButton>
       <LoginOuterView
-        contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
+        // contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}
+        >
         <InputView>
           {formElementsArray?.map(
             (x, index) =>
@@ -339,7 +340,7 @@ const Login = props => {
                 />
               ),
           )}
-          <StyledForgot>
+          {/* <StyledForgot>
             <TouchableOpacity
               onPress={() => props.navigation.navigate(Routes.forgotPassword)}>
               <LoginDescription>Forgot Password?</LoginDescription>
@@ -349,7 +350,7 @@ const Login = props => {
                 {!isOtpLogin ? 'OTP Login' : 'Password Login'}
               </LoginDescription>
             </TouchableOpacity>
-          </StyledForgot>
+          </StyledForgot> */}
         </InputView>
         <LoginSubmitButton
           labelStyle={{color: colors.backgroundColor}}

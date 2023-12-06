@@ -21,8 +21,8 @@ export const CustomTab = ({state, descriptors, navigation, colors}) => {
         // const midEle = Math.floor(state.routes.length / 2) !== index;
         // const icon = options.tabBarIcon(isFocused && midEle || !midEle ? colors.backgroundColor : colors.textDeep, (isFocused && midEle) || (!midEle && !isFocused) ? 25 : 30)
         const icon = options.tabBarIcon(
-          isFocused ? colors.backgroundColor : colors.mainColor,
-          isFocused ? spacing.width * 6 : spacing.width * 7,
+          isFocused ? colors.mainColor : 'gray',
+          spacing.width * 7,
         );
         const label =
           options.tabBarLabel !== undefined

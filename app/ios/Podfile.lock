@@ -487,6 +487,8 @@ PODS:
     - ReactCommon/turbomodule/core
   - react-native-splash-screen (3.3.0):
     - React-Core
+  - react-native-webview (11.23.1):
+    - React-Core
   - React-perflogger (0.70.3)
   - React-RCTActionSheet (0.70.3):
     - React-Core/RCTActionSheetHeaders (= 0.70.3)
@@ -572,7 +574,7 @@ PODS:
     - RNFBApp
   - RNFS (2.20.0):
     - React-Core
-  - RNGestureHandler (2.7.1):
+  - RNGestureHandler (2.8.0):
     - React-Core
   - RNGoogleMobileAds (8.1.2):
     - Google-Mobile-Ads-SDK (= 9.10.0)
@@ -585,6 +587,8 @@ PODS:
     - React-Core
     - React-RCTImage
   - RNShare (7.9.1):
+    - React-Core
+  - RNSVG (14.0.0):
     - React-Core
   - SocketRocket (0.6.0)
   - VisionCamera (2.14.1):
@@ -655,6 +659,7 @@ DEPENDENCIES:
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -678,6 +683,7 @@ DEPENDENCIES:
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - VisionCamera (from `../node_modules/react-native-vision-camera`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -780,6 +786,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -826,6 +834,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNShare:
     :path: "../node_modules/react-native-share"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   VisionCamera:
     :path: "../node_modules/react-native-vision-camera"
   Yoga:
@@ -898,6 +908,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: 4bc9ed38c8be255b515d8c88babbaf74973f91a8
   react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
+  react-native-webview: d33e2db8925d090871ffeb232dfa50cb3a727581
   React-perflogger: 082b4293f0b3914ff41da35a6c06ac4490fcbcc8
   React-RCTActionSheet: 83da3030deb5dea54b398129f56540a44e64d3ae
   React-RCTAnimation: bac3a4f4c0436554d9f7fbb1352a0cdcb1fb0f1c
@@ -916,11 +927,12 @@ SPEC CHECKSUMS:
   RNFBDynamicLinks: 1f67ac77c9abd806f3abf4716f85411fac00d24c
   RNFBMessaging: a006029b26c2d7b34c93c45ff1b8fedb5fae35d5
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
-  RNGestureHandler: b7a872907ee289ada902127f2554fa1d2c076122
+  RNGestureHandler: 62232ba8f562f7dea5ba1b3383494eb5bf97a4d3
   RNGoogleMobileAds: 431b84d5cf3940affaadfb58560c3da6f511dca6
   RNGoogleSignin: b2179ba653c759b936404a7746fc5302f9de6a5a
   RNScreens: 1b7bb502dac62cc4cf01b94bea591c8da275132f
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
+  RNSVG: 255767813dac22db1ec2062c8b7e7b856d4e5ae6
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   VisionCamera: 1b343c2325943efa72808450cf47e14907b9a7fa
   Yoga: 2ed968a4f060a92834227c036279f2736de0fce3

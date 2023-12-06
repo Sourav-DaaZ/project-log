@@ -1,22 +1,54 @@
 import styled from 'styled-components/native';
 import { ScrollView, View, Image } from 'react-native';
-import { Headline } from 'react-native-paper';
+import { Button, Headline, Paragraph, Text, Title } from 'react-native-paper';
 import Chip from '../../sharedComponents/chip';
 
 
 export const StyledHorizontalScrollView = styled(ScrollView)`
     
 `;
+export const StyledProfileView = styled(View)`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: ${(props) => props.theme.spacing.width}px;
+`;
 
+export const InputView = styled(View)`
+    background-color: ${(props) => props.theme.colors[props.theme.baseColor].backgroundColor};
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-bottom: ${(props) => props.theme.spacing.height * 2}px;
+    min-height: ${(props) => props.theme.spacing.height * 3}px;
+    justify-content: center;
+    width: 100%;
+`;
+
+export const StyledTitle = styled(Text)`
+    font-size: ${(props) => props.xl?props.theme.fonts.veryLarge * 1.4: props.l?props.theme.fonts.medium * 1.3: props.theme.fonts.medium}px;
+    font-family: ${(props) => props.theme.fontWeight.semiBold};
+    color: ${(props) => props.theme.colors[props.theme.baseColor].textDeep}; 
+    text-align: center
+`;
+
+export const StyledButton = styled(Button)`
+    width: 100%;
+    margin-bottom: ${(props) => props.theme.spacing.height * 1.5}px;
+    padding: 5px;
+`;
+
+export const StyledParagraph = styled(Paragraph)`
+    font-size: ${(props) => props.theme.fonts.small * 1.3}px;
+    color: ${(props) => props.theme.colors[props.theme.baseColor].textLight}; 
+    font-family: ${(props) => props.theme.fontWeight.light};
+`;
 export const StyledHeaderView = styled(View)`
     display: flex; 
     flex-direction: row; 
     justify-content: space-between;
     align-items: center;
-    margin-bottom: ${(props) => props.theme.spacing.height}px;
     padding-bottom: ${(props) => props.theme.spacing.height}px;
-    border-bottom-width: 1px;
-    border-bottom-color: ${(props) => props.theme.colors[props.theme.baseColor].borderColor};
 `;
 
 export const StyledHeaderHeadline = styled(Headline)`
@@ -45,8 +77,7 @@ export const StyledScrollView = styled(ScrollView)`
 `;
 
 export const StyledChip = styled(Chip)`
-    margin-right: ${(props) => props.theme.spacing.width * 3}px;
-    padding: ${(props) => props.theme.spacing.width * .3}px;
+    max-height: ${(props) => props.theme.spacing.height * 9}px;
 `;
 
 export const StyledImage = styled(Image)`

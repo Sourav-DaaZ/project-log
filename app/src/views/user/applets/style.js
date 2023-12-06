@@ -9,7 +9,9 @@ export const StyledProfileView = styled(View)`
     justify-content: space-between;
     align-items: center;
     margin-bottom: ${(props) => props.theme.spacing.height}px;
-    padding: ${(props) => props.theme.spacing.height * 2}px;
+    padding-bottom: ${(props) => props.theme.spacing.height * 2}px;
+    border-bottom-width: 1px;
+    border-bottom-color: ${(props) => props.theme.colors[props.theme.baseColor].borderColor};
 `;
 
 export const StyledProfile = styled(View)`
@@ -19,9 +21,10 @@ export const StyledProfile = styled(View)`
 `;
 
 export const StyledTitle = styled(Title)`
-    font-size: ${(props) => props.theme.fonts.large}px;
+    font-size: ${(props) => props.s? props.theme.fonts.medium : props.theme.fonts.large}px;
     font-family: ${(props) => props.theme.fontWeight.semiBold};
     color: ${(props) => props.theme.colors[props.theme.baseColor].textDeep}; 
+    margin: ${(props) => props.theme.fonts.medium * .6}px
 `;
 
 export const StyledSemiTitle = styled(Title)`
@@ -29,8 +32,6 @@ export const StyledSemiTitle = styled(Title)`
     color: ${(props) => props.theme.colors[props.theme.baseColor].textDeep}; 
     letter-spacing: 1px;
     font-family: ${(props) => props.theme.fontWeight.semiBold};
-    margin-bottom: 30px;
-    margin-top: 10px;
 `;
 
 export const StyledParagraph = styled(Paragraph)`

@@ -46,20 +46,18 @@ function Routs(props) {
   }, []);
 
   useEffect(() => {
-    console.log('hiii');
     console.log(ReduxStore.getState().config.navigation !== null)
     if (
       Platform.OS === 'android' &&
       ReduxStore.getState().config.navigation !== null &&
       !entry
     ) {
-      console.log('hiiiiii')
       setEntry(true);
       FCMNotificationHandler.backgroundNotification();
       FCMNotificationHandler.NotifinationListener();
     }
   },[authStore]);
-console.log(ReduxStore.getState().config)
+console.log(authStore)
   return (
     <React.Suspense fallback={<SplashScreen />}>
       <NavigationContainer>

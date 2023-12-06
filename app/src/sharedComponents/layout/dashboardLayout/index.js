@@ -145,7 +145,7 @@ const DashboardLayout = props => {
     <ShadowWrapperContainer none {...props}>
       <DashboardOuterView>
         <StatusBar
-          backgroundColor={colors.backgroundColor}
+          backgroundColor={colors.backgroundDeepColor}
           barStyle="dark-content"
         />
         {props.children}

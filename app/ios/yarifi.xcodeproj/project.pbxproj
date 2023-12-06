@@ -14,8 +14,11 @@
 		2122610F28F8B51800258D18 /* hermes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2122610E28F8B51800258D18 /* hermes.xcframework */; };
 		2122611028F8B51800258D18 /* hermes.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2122610E28F8B51800258D18 /* hermes.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		21C84ECA28F9942E003853B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C84EC928F9942E003853B1 /* GoogleService-Info.plist */; };
+		31073C89EE75443CAD438D39 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A20E95A02EB466A853D6899 /* Oswald-Bold.ttf */; };
+		49A6088A126342B382B0B5A5 /* Oswald-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1CFB41BDE254A72A92D9AD8 /* Oswald-Medium.ttf */; };
 		6DFAB31F3FB4B37CE9391136 /* libPods-yarifi-yarifiTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2490EADEF1956358F18212ED /* libPods-yarifi-yarifiTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8D852D6F5C404F7E9D888C34 /* Oswald-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C168641D05B45CF994500A6 /* Oswald-ExtraLight.ttf */; };
 		8F62D72728F30AB3009BBA79 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F62D71728F30AB3009BBA79 /* Fontisto.ttf */; };
 		8F62D72828F30AB3009BBA79 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F62D71828F30AB3009BBA79 /* Octicons.ttf */; };
 		8F62D72928F30AB3009BBA79 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F62D71928F30AB3009BBA79 /* Feather.ttf */; };
@@ -32,13 +35,10 @@
 		8F62D73428F30AB3009BBA79 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F62D72428F30AB3009BBA79 /* EvilIcons.ttf */; };
 		8F62D73528F30AB3009BBA79 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F62D72528F30AB3009BBA79 /* SimpleLineIcons.ttf */; };
 		8F62D73628F30AB3009BBA79 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F62D72628F30AB3009BBA79 /* MaterialIcons.ttf */; };
-		C4F596AAD720F3E5B0F4B6B2 /* libPods-yarifi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5768032E2DE8AA1CBC8A6C1C /* libPods-yarifi.a */; };
-		31073C89EE75443CAD438D39 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A20E95A02EB466A853D6899 /* Oswald-Bold.ttf */; };
-		8D852D6F5C404F7E9D888C34 /* Oswald-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C168641D05B45CF994500A6 /* Oswald-ExtraLight.ttf */; };
-		AD3AC08355BA49E2AD471222 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 433CB98A35C74D1391CA8908 /* Oswald-Light.ttf */; };
-		49A6088A126342B382B0B5A5 /* Oswald-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1CFB41BDE254A72A92D9AD8 /* Oswald-Medium.ttf */; };
 		9044097B2C1F495BAC5D85F2 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4431210B8EDD4A649EDE93CC /* Oswald-Regular.ttf */; };
 		988CD237E0BD421BB813712E /* Oswald-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32DBDD6596B64F3E96D6B876 /* Oswald-SemiBold.ttf */; };
+		AD3AC08355BA49E2AD471222 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 433CB98A35C74D1391CA8908 /* Oswald-Light.ttf */; };
+		C4F596AAD720F3E5B0F4B6B2 /* libPods-yarifi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5768032E2DE8AA1CBC8A6C1C /* libPods-yarifi.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +69,7 @@
 		00E356EE1AD99517003FC87E /* yarifiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = yarifiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* yarifiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = yarifiTests.m; sourceTree = "<group>"; };
+		0A20E95A02EB466A853D6899 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Bold.ttf"; path = "../src/assets/fonts/Oswald-Bold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* yarifi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yarifi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = yarifi/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = yarifi/AppDelegate.mm; sourceTree = "<group>"; };
@@ -77,10 +78,14 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = yarifi/main.m; sourceTree = "<group>"; };
 		15CBDE0898D51B4B5EFEF5AE /* Pods-yarifi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yarifi.debug.xcconfig"; path = "Target Support Files/Pods-yarifi/Pods-yarifi.debug.xcconfig"; sourceTree = "<group>"; };
 		16E04B149075AD1ABBD12FEF /* Pods-yarifi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yarifi.release.xcconfig"; path = "Target Support Files/Pods-yarifi/Pods-yarifi.release.xcconfig"; sourceTree = "<group>"; };
+		1C168641D05B45CF994500A6 /* Oswald-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-ExtraLight.ttf"; path = "../src/assets/fonts/Oswald-ExtraLight.ttf"; sourceTree = "<group>"; };
 		1FBF99E09F53C5E03CD6795E /* Pods-yarifiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yarifiTests.debug.xcconfig"; path = "Target Support Files/Pods-yarifiTests/Pods-yarifiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2122610E28F8B51800258D18 /* hermes.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = hermes.xcframework; path = "Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework"; sourceTree = "<group>"; };
 		21C84EC928F9942E003853B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2490EADEF1956358F18212ED /* libPods-yarifi-yarifiTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-yarifi-yarifiTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		32DBDD6596B64F3E96D6B876 /* Oswald-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-SemiBold.ttf"; path = "../src/assets/fonts/Oswald-SemiBold.ttf"; sourceTree = "<group>"; };
+		433CB98A35C74D1391CA8908 /* Oswald-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Light.ttf"; path = "../src/assets/fonts/Oswald-Light.ttf"; sourceTree = "<group>"; };
+		4431210B8EDD4A649EDE93CC /* Oswald-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Regular.ttf"; path = "../src/assets/fonts/Oswald-Regular.ttf"; sourceTree = "<group>"; };
 		5768032E2DE8AA1CBC8A6C1C /* libPods-yarifi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-yarifi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		654FE4A62B769373EA75B8FD /* Pods-yarifi-yarifiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yarifi-yarifiTests.release.xcconfig"; path = "Target Support Files/Pods-yarifi-yarifiTests/Pods-yarifi-yarifiTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = yarifi/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,13 +108,8 @@
 		8F9F4EF628F2B35F007F8CAB /* yarifi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = yarifi.entitlements; path = yarifi/yarifi.entitlements; sourceTree = "<group>"; };
 		93B17149C32CB49238123DE9 /* Pods-yarifi-yarifiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yarifi-yarifiTests.debug.xcconfig"; path = "Target Support Files/Pods-yarifi-yarifiTests/Pods-yarifi-yarifiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A812C426A28A84A4120E485 /* Pods-yarifiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yarifiTests.release.xcconfig"; path = "Target Support Files/Pods-yarifiTests/Pods-yarifiTests.release.xcconfig"; sourceTree = "<group>"; };
+		A1CFB41BDE254A72A92D9AD8 /* Oswald-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Medium.ttf"; path = "../src/assets/fonts/Oswald-Medium.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		0A20E95A02EB466A853D6899 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; name = "Oswald-Bold.ttf"; path = "../src/assets/fonts/Oswald-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1C168641D05B45CF994500A6 /* Oswald-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Oswald-ExtraLight.ttf"; path = "../src/assets/fonts/Oswald-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		433CB98A35C74D1391CA8908 /* Oswald-Light.ttf */ = {isa = PBXFileReference; name = "Oswald-Light.ttf"; path = "../src/assets/fonts/Oswald-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A1CFB41BDE254A72A92D9AD8 /* Oswald-Medium.ttf */ = {isa = PBXFileReference; name = "Oswald-Medium.ttf"; path = "../src/assets/fonts/Oswald-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4431210B8EDD4A649EDE93CC /* Oswald-Regular.ttf */ = {isa = PBXFileReference; name = "Oswald-Regular.ttf"; path = "../src/assets/fonts/Oswald-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		32DBDD6596B64F3E96D6B876 /* Oswald-SemiBold.ttf */ = {isa = PBXFileReference; name = "Oswald-SemiBold.ttf"; path = "../src/assets/fonts/Oswald-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +247,7 @@
 			sourceTree = "<group>";
 		};
 		E0CD2A11BAA546958E2F12E2 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				0A20E95A02EB466A853D6899 /* Oswald-Bold.ttf */,
 				1C168641D05B45CF994500A6 /* Oswald-ExtraLight.ttf */,
@@ -257,8 +257,8 @@
 				32DBDD6596B64F3E96D6B876 /* Oswald-SemiBold.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 

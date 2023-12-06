@@ -10,6 +10,7 @@ export const DashboardOuterView = styled(SafeAreaView)`
     flex: 1;
     flex-direction: column;
     z-index: 1;
+    padding: 5px;
 `;
 
 export const StyledFullImg = styled(Image)`

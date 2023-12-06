@@ -16,7 +16,6 @@ import { ThemeContext } from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import { TouchableOpacity } from 'react-native';
 import ImagePreview from '../imagePreview';
-import BannerImg from '../../assets/images/imgBanner.png';
 import { truncate } from '../../utils'
 
 const CardComponent = (props) => {
@@ -27,7 +26,7 @@ const CardComponent = (props) => {
     
     return (
         <Animatable.View animation='bounceIn'>
-            {props.images ? <TouchableOpacity onPress={() => setShow(true)}><StyledCardCover source={props.images && props.images !== '' ? { uri: props.images } : BannerImg} /></TouchableOpacity> : null}
+            {props.images && <TouchableOpacity onPress={() => setShow(true)}><StyledCardCover source={props.images && props.images !== '' && { uri: props.images } } /></TouchableOpacity>}
             <StyledCard style={{ marginTop: !props.images ? spacing.height : -spacing.height }}>
                 {props.profile ? <StyledCardContentProfile>
                     {props.profile}

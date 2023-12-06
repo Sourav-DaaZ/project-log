@@ -1,7 +1,7 @@
 export const defaultColor = {
     blue: {
-        mainColor: '#191B49',
-        mainByColor: '#fb641b',
+        mainColor: '#52C2CB',
+        mainByColor: '#967259',
         backgroundColor: '#ffffff',
         backgroundDeepColor: '#f1f3f6',
         iconColor: '#222428',

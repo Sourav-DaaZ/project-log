@@ -14,7 +14,7 @@ export const StyledIonicons = styled(Ionicons)`
 `;
 
 export const LoginSafeView = styled(SafeAreaView)`
-  flex: .3;
+  flex: .4;
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.colors[props.theme.baseColor].mainColor};
@@ -27,7 +27,7 @@ export const LoginSafeView = styled(SafeAreaView)`
 export const LoginLogo = styled(Image)`
   margin-top: -${(props) => props.theme.spacing.height * 7}px;
   width: ${(props) => props.theme.spacing.width * 30}px;
-  height: ${(props) => props.theme.spacing.height * 5}px;
+  height: ${(props) => props.theme.spacing.height * 50}px;
   resize-mode: contain;
 `;
 
@@ -64,7 +64,7 @@ export const LoginDeviderText = styled(Animatable.Text)`
 `;
 
 export const LoginScrollView = styled(Animatable.View)`
-  flex: .8;
+  flex: .6;
   display: flex;
   justify-content: center;
   align-items: center;

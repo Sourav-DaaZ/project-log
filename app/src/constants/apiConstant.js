@@ -3,7 +3,7 @@ export const API = {
   // currentEnv: 'qa',
   // currentEnv: 'prod',
   baseUrls: {
-    dev: 'http://192.168.1.5/api',
+    dev: 'http://192.168.1.2/api',
     qa: '',
     uat: '',
     prod: 'https://yarifi.com/api/v1',

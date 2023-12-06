@@ -17,12 +17,13 @@ const ModalComponent = (props) => {
     const containerStyle = {
         backgroundColor: 'white',
         position: 'absolute',
-        bottom: -(spacing.height * 5),
+        bottom: -(spacing.height * 3),
         with: '100%',
         left: 0,
         right: 0,
         borderRadius: 30,
         paddingTop: (spacing.height * 5),
+        paddingBottom: (spacing.height * 5),
         zIndex: 999
     };
 
@@ -35,7 +36,7 @@ const ModalComponent = (props) => {
                     style={{ position: 'absolute', right: (spacing.width * 5), top: (spacing.height * 2) }}
                     onPress={props.onClose}
                 /> : null}
-                <Text style={{ position: 'absolute', top: -(spacing.height * 5), left: (spacing.width * 5), color: colors.backgroundColor, fontSize: fonts.medium }}>{props.title}</Text>
+                <Text style={{ position: 'absolute', left: (spacing.width * 5), top: (spacing.height * 2), left: (spacing.width * 5), color: colors.textDeep, fontSize: fonts.medium * 1.2, fontWeight: '700' }}>{props.title}</Text>
                 {props.children}
 
                 {props.popupData ? <React.Fragment>

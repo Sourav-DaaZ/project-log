@@ -128,13 +128,13 @@ const LoginLayout = props => {
       <StatusBar backgroundColor={colors.mainColor} barStyle="light-content" />
       <SnackBar text={authStore.message.msg} type={authStore.message.type} />
       <LoginSafeView animation="lightSpeedIn">
-        <LoginBack onPress={() => props.navigation.goBack()}>
+        {/* <LoginBack onPress={() => props.navigation.goBack()}>
           <StyledIonicons name="chevron-back" size={spacing.width * 10} />
-        </LoginBack>
+        </LoginBack> */}
         <LoginLogo source={logoImg} />
       </LoginSafeView>
       <LoginScrollView animation="zoomIn">{props.children}</LoginScrollView>
-      <LoginDevider animation="bounceIn">
+      {/* <LoginDevider animation="bounceIn">
         <LoginDeviderLine />
         <View>
           <LoginDeviderText animation="bounceIn">
@@ -158,7 +158,7 @@ const LoginLayout = props => {
             size={spacing.width * 12}
           />
         </TouchableOpacity>
-      </LoginNetworkView>
+      </LoginNetworkView> */}
     </LoginContainer>
   );
 };
