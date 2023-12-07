@@ -45,6 +45,7 @@ import { Image } from 'react-native-animatable';
 import ButtonComponent from '../../sharedComponents/button';
 import ModalComponent from '../../sharedComponents/modal';
 import validation from '../../constants/validationMsg';
+import CameraComponent from '../camera';
 
 const Dashboard = props => {
   const themeContext = useContext(ThemeContext);
@@ -62,6 +63,7 @@ const Dashboard = props => {
   const [flag, setFlag] = useState('Check In');
   const [refreshing, setRefreshing] = useState(false);
   const [chatCount, setChatCount] = useState(0);
+  const [url, setUrl] = useState('');
   const handleInnerPressIn = () => setOuterScrollViewScrollEnabled(false);
   const handleInnerPressOut = () => setOuterScrollViewScrollEnabled(true);
   const [data, setData] = useState({
@@ -319,7 +321,7 @@ const Dashboard = props => {
       config: data.controls[key],
     });
   }
-
+console.log(url)
   return (
     <DashboardLayout
       {...props}
@@ -453,7 +455,7 @@ const Dashboard = props => {
             {flag !== 'Check In' ? <StyledButton labelStyle={{ color: "#52C2CB" }} style={{ borderColor: '#52C2CB' }} mode="outlined" onPress={() => setFlag('shift')}>Shift Overview</StyledButton> : null}
           </View>
         </ShadowWrapperContainer>
-        <ModalComponent title={'Check In'} show={flag === 'CCheck In'} onClose={() => setFlag('Check In')}>
+        <ModalComponent title={'Check In'} show={flag === 'CCheck In' || flag === 'Camera'} onClose={() => setFlag('Check In')}>
           <InputView>
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center', marginTop: 30, marginBottom: 0 }}>
               <Text style={{ color: colors.textLight, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>Shift:</Text>
@@ -478,6 +480,18 @@ const Dashboard = props => {
                 />
               ),
             )}
+            <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItem: 'center', marginTop: 30, marginBottom: 0 }}>
+              <TouchableOpacity onPress={()=> setFlag('Camera')}>
+                <Image
+                  style={{paddingTop: 50, width: '50%', height: 150}}
+                  source={url
+                    ? {
+                      uri: url,
+                    }
+                    : AvatarImg}
+                />
+              </TouchableOpacity>
+            </View>
             <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItem: 'center', marginTop: 30, marginBottom: 0 }}>
               <Text style={{ color: colors.textLight, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>Location:</Text>
             </View>
@@ -561,6 +575,11 @@ const Dashboard = props => {
               <Text style={{ color: colors.textLight, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>Location:</Text>
             </View>
           </InputView>
+        </ModalComponent>
+        <ModalComponent title={'Camera'} show={flag === 'Camera'} onClose={() => setFlag('CCheck In')}>
+          <View style={{height: 700}}>
+            <CameraComponent setUrl={setUrl} close={() => setFlag('CCheck In')}/>
+          </View>
         </ModalComponent>
       </StyledScrollView>
     </DashboardLayout>

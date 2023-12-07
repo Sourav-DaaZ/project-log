@@ -36,14 +36,10 @@ const CameraComponent = props => {
       if (camera.current == null) throw new Error('Camera Ref is Null');
       const photo = await camera.current.takeSnapshot(takePhotoOptions);
       const base64image = await RNFS.readFile(photo.path, 'base64');
-      let varData = props.route.params?.data ? props.route.params.data : {};
-      if (props.route.params?.selectItem) {
-        varData[props.route.params.selectItem] =
-          'data:image/png;base64,' + base64image;
-      }
-      props.navigation.navigate(Routes.userVerification, {data: varData});
+      props.setUrl('data:image/png;base64,' + base64image);
+      props.close();
     } catch (e) {
-      errorFnc(e);
+      console.log(e)
     }
   };
 
