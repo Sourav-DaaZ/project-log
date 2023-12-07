@@ -122,20 +122,6 @@ const NotificationScreen = props => {
                   description={timeFormat(x.createdAt)}
                 />
               </TouchableOpacity>
-              {(i > 0 &&
-                i % Math.floor(defaultValue.paginationLength / 2) === 0) ||
-              (i === data.length - 1 &&
-                data.length < Math.floor(defaultValue.paginationLength / 2)) ? (
-                <View style={{marginBottom: spacing.height}}>
-                  <Admob
-                    id={
-                      admobValue.notificationBanner[
-                        i % Math.floor(defaultValue.paginationLength / 2)
-                      ]
-                    }
-                  />
-                </View>
-              ) : null}
             </React.Fragment>
           ))}
           {dataLoader ? (

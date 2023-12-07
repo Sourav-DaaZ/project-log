@@ -22,8 +22,7 @@ const ModalComponent = (props) => {
         left: 0,
         right: 0,
         borderRadius: 30,
-        paddingTop: (spacing.height * 5),
-        paddingBottom: (spacing.height * 5),
+        paddingTop: (spacing.height * 5.5),
         zIndex: 999
     };
 
@@ -39,7 +38,7 @@ const ModalComponent = (props) => {
                 <Text style={{ position: 'absolute', left: (spacing.width * 5), top: (spacing.height * 2), left: (spacing.width * 5), color: colors.textDeep, fontSize: fonts.medium * 1.2, fontWeight: '700' }}>{props.title}</Text>
                 {props.children}
 
-                {props.popupData ? <React.Fragment>
+                {props.popupData ? <View>
                     <TouchableOpacity onPress={() => setShowNotes(!showNotes)}>
                         <StyledParagraph style={{ textAlign: 'center', color: colors.mainByColor }}>{showNotes ? "Hide" : "Show"} Notes</StyledParagraph>
                     </TouchableOpacity>
@@ -60,7 +59,7 @@ const ModalComponent = (props) => {
                             <Ionicons name='send' size={spacing.width * 10} style={{ color: colors.mainByColor, marginLeft: spacing.width * 2 }} />
                         </TouchableOpacity> : null}
                     </StyledInputView>
-                </React.Fragment> : null}
+                </View> : null}
                 {props.btn ? <ButtonWrapper>
                     {props.btn[0]?.text ? <UpdateButton mode="outlined" full={props.btn[0]?.full} onPress={props.btn[0].onPress}>
                         <CancelText>{props.btn[0].text}</CancelText>

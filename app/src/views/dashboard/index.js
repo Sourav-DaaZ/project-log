@@ -104,8 +104,25 @@ const Dashboard = props => {
         elementType: 'input',
         elementConfig: {
           type: 'projectHr',
-          text: 'Project Hour',
-          placeholder: 'Enter your Project Hour',
+          text: 'Project',
+          placeholder: 'Your Project',
+        },
+        value: '',
+        validation: {
+          required: true,
+          password: false,
+        },
+        errors: '',
+        valid: false,
+        className: [],
+        icons: [],
+      },
+      task: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'task',
+          text: 'Task',
+          placeholder: 'Add a task',
         },
         value: '',
         validation: {
@@ -338,16 +355,14 @@ const Dashboard = props => {
             </StyledProfileView>
           }
           right={
-            authStore?.access_token && !authStore?.access_token !== '' ? (
-              <Badge show={chatCount ? true : false} count={chatCount}>
-                <Ionicons
-                  name="notifications-outline"
-                  color={colors.iconColor}
-                  size={spacing.width * 8}
-                  onPress={() => props.navigation.navigate(Routes.chatList)}
-                />
-              </Badge>
-            ) : null
+            <Badge show={chatCount ? true : false} count={chatCount}>
+              <Ionicons
+                name="notifications-outline"
+                color={colors.iconColor}
+                size={spacing.width * 8}
+                onPress={() => props.navigation.navigate(Routes.notification)}
+              />
+            </Badge>
           }
         />
 
@@ -438,7 +453,38 @@ const Dashboard = props => {
             {flag !== 'Check In' ? <StyledButton labelStyle={{ color: "#52C2CB" }} style={{ borderColor: '#52C2CB' }} mode="outlined" onPress={() => setFlag('shift')}>Shift Overview</StyledButton> : null}
           </View>
         </ShadowWrapperContainer>
-        <ModalComponent title={flag === 'CClock Out' ? 'Clock Out' : flag === 'CCheck In' ? 'Clock In' : 'Shift Overview'} show={flag === 'CClock Out' || flag === 'shift' || flag === 'CCheck In'} onClose={() => setFlag('Close')}>
+        <ModalComponent title={'Check In'} show={flag === 'CCheck In'} onClose={() => setFlag('Check In')}>
+          <InputView>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center', marginTop: 30, marginBottom: 0 }}>
+              <Text style={{ color: colors.textLight, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>Shift:</Text>
+              <Text style={{ color: colors.textColor, fontSize: fonts.medium }}>A</Text>
+            </View>
+            {formElementsArray?.map(
+              (x, index) =>
+              (
+                <Input
+                  key={index}
+                  title={x.config?.elementConfig?.text}
+                  placeholder={x.config?.elementConfig?.placeholder}
+                  onInputChange={onInputChange}
+                  onSubmit={() => Keyboard.dismiss()}
+                  value={x.config?.value}
+                  type={x.config?.elementConfig?.type}
+                  isValid={x.config?.valid}
+                  validation={x.config?.validation}
+                  errorMsg={x.config?.errors}
+                  icons={x.config?.icons}
+                  ele={x.config?.elementType}
+                />
+              ),
+            )}
+            <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItem: 'center', marginTop: 30, marginBottom: 0 }}>
+              <Text style={{ color: colors.textLight, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>Location:</Text>
+            </View>
+            <StyledButton labelStyle={{ color: "white" }} style={{ backgroundColor: '#52C2CB', marginTop: 10 }} onPress={() => setFlag('Checked In')}>{"Check In"}</StyledButton>
+          </InputView>
+        </ModalComponent>
+        <ModalComponent title={'Clock Out'} show={flag === 'CClock Out'} onClose={() => setFlag('Close')}>
           <InputView>
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center', marginTop: 30, marginBottom: 0 }}>
               <Text style={{ color: colors.textLight, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>Shift:</Text>
@@ -474,9 +520,46 @@ const Dashboard = props => {
             <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItem: 'center', marginTop: 30, marginBottom: 0 }}>
               <Text style={{ color: colors.textLight, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>Location:</Text>
             </View>
-            {flag === 'CCheck In'  ? <StyledButton labelStyle={{ color: "white" }} style={{ backgroundColor: '#52C2CB', marginTop: 10 }} onPress={() => setFlag('Checked In')}>{"Check In"}</StyledButton> : null}
-            {flag === 'CClock Out'  ? <StyledButton labelStyle={{ color: "white" }} style={{ backgroundColor: '#52C2CB', marginTop: 10 }} onPress={() => setFlag('Check In')}>{"Check Out"}</StyledButton> : null}
-            {flag === 'CClock Out' ? <StyledButton labelStyle={{ color: "#52C2CB" }} style={{ borderColor: '#52C2CB' }} mode="outlined" onPress={() => setFlag('EShift')}>Edit Shift</StyledButton> : null}
+            <StyledButton labelStyle={{ color: "white" }} style={{ backgroundColor: '#52C2CB', marginTop: 10 }} onPress={() => setFlag('Check In')}>{"Check Out"}</StyledButton>
+            <StyledButton labelStyle={{ color: "#52C2CB" }} style={{ borderColor: '#52C2CB' }} mode="outlined" onPress={() => setFlag('EShift')}>Edit Shift</StyledButton>
+          </InputView>
+        </ModalComponent>
+        <ModalComponent title={'Shift Overview'} show={flag === 'shift'} onClose={() => setFlag('Close')}>
+          <InputView>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center', marginTop: 30, marginBottom: 0 }}>
+              <Text style={{ color: colors.textLight, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>Shift:</Text>
+              <Text style={{ color: colors.textColor, fontSize: fonts.medium }}>A</Text>
+            </View>
+            {formElementsArray?.map(
+              (x, index) =>
+              (
+                index < 3 && <Input
+                  key={index}
+                  title={x.config?.elementConfig?.text}
+                  placeholder={x.config?.elementConfig?.placeholder}
+                  onInputChange={onInputChange}
+                  onSubmit={() => Keyboard.dismiss()}
+                  value={x.config?.value}
+                  type={x.config?.elementConfig?.type}
+                  isValid={x.config?.valid}
+                  validation={x.config?.validation}
+                  errorMsg={x.config?.errors}
+                  icons={x.config?.icons}
+                  ele={x.config?.elementType}
+                />
+              ),
+            )}
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center', marginTop: 30, marginBottom: 0 }}>
+              <Text style={{ color: colors.textLight, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>Total Break Time:</Text>
+              <Text style={{ color: colors.textColor, fontSize: fonts.medium }}>14hr</Text>
+            </View>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItem: 'center', marginTop: 10, marginBottom: 0 }}>
+              <Text style={{ color: colors.textColor, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>24hr</Text>
+              <Text style={{ color: colors.textColor, fontSize: fonts.medium }}>12:00am</Text>
+            </View>
+            <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItem: 'center', marginTop: 30, marginBottom: 0 }}>
+              <Text style={{ color: colors.textLight, fontSize: fonts.medium * 1.1, fontWeight: '700' }}>Location:</Text>
+            </View>
           </InputView>
         </ModalComponent>
       </StyledScrollView>

@@ -5,6 +5,7 @@ import { RefreshControl, TouchableOpacity, View } from 'react-native';
 import {
     StyledButtonLoadMore,
     StyledScrollView,
+    StyledTitle,
 } from './style';
 import { useSelector, shallowEqual } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
@@ -97,32 +98,43 @@ const ChatScreen = (props) => {
     }
 
     return (
-        showLoader ? <Loader /> : <ShadowWrapperContainer none dataLength={data && isArray(data) ? data.length : null}>
-            <StyledScrollView
-                refreshControl={
-                    <RefreshControl refreshing={refreshing} onRefresh={refreshFnc} />
-                }
-            >
-                {data?.map((x, i) => (
-                    <React.Fragment key={i}>
-                        <TouchableOpacity onPress={() => props.navigation.navigate(Routes.userChat, {
-                            id: detailsStore.id?.toString() !== x?.sender_user_id?._id?.toString() ? x.sender_user_id?._id : x.receiver_user_id?._id,
-                            userData: detailsStore.id?.toString() !== x?.sender_user_id?._id?.toString() ? x.sender_user_id?.userInfo : x.receiver_user_id.userInfo
-                        })}>
-                            <ListItem
-                                title={truncate(detailsStore.id?.toString() !== x?.sender_user_id?._id?.toString() ? x.sender_user_id?.userId : x.receiver_user_id?.userId)}
-                                description={truncate(x?.comments ? x.comments[0]?.msg : '')}
-                                descriptionBold={x?.viewList && x.viewList.length > 0 && !x.viewList.includes(detailsStore.id) ? x?.comments ? truncate(x.comments[0]?.msg) : '' : null}
-                                smallDescription={timeFormat(x?.updatedAt)}
-                                image={<Avatar.Image style={{ margin: spacing.width }} size={spacing.width * 15} source={detailsStore.id?.toString() !== x?.sender_user_id?._id?.toString() ? x.sender_user_id?.userInfo?.images ? { uri: x.sender_user_id.userInfo.images } : AvatarImg : (x.receiver_user_id?.userInfo?.images ? { uri: x.receiver_user_id.userInfo.images } : AvatarImg)} />}
-                            />
-                        </TouchableOpacity>
-                        {((i > 0 && ((i % Math.floor(defaultValue.paginationLength / 2)) === 0) || (i === data.length - 1 && data.length < Math.floor(defaultValue.paginationLength / 2)))) ? <View style={{ marginBottom: spacing.height }}><Admob id={admobValue.chatPage[(i % Math.floor(defaultValue.paginationLength / 2))]} /></View> : null}
-                    </React.Fragment>
-                ))}
-                {dataLoader ? <StyledButtonLoadMore labelStyle={{ color: colors.mainByColor }} mode='text' onPress={() => setPage(page + 1)}>Load More</StyledButtonLoadMore> : null}
-            </StyledScrollView>
-        </ShadowWrapperContainer>
+        <React.Fragment>
+            <StyledTitle>Chats</StyledTitle>
+           { showLoader ? <Loader /> : <ShadowWrapperContainer none dataLength={data && !isArray(data) ? data.length : null}>
+                <StyledScrollView
+                    refreshControl={
+                        <RefreshControl refreshing={refreshing} onRefresh={refreshFnc} />
+                    }
+                    style
+                >
+                    {data?.map((x, i) => (
+                        <React.Fragment key={i}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate(Routes.userChat, {
+                                id: detailsStore.id?.toString() !== x?.sender_user_id?._id?.toString() ? x.sender_user_id?._id : x.receiver_user_id?._id,
+                                userData: detailsStore.id?.toString() !== x?.sender_user_id?._id?.toString() ? x.sender_user_id?.userInfo : x.receiver_user_id.userInfo
+                            })}>
+                                <ListItem
+                                    title={truncate(detailsStore.id?.toString() !== x?.sender_user_id?._id?.toString() ? x.sender_user_id?.userId : x.receiver_user_id?.userId)}
+                                    description={truncate(x?.comments ? x.comments[0]?.msg : '')}
+                                    descriptionBold={x?.viewList && x.viewList.length > 0 && !x.viewList.includes(detailsStore.id) ? x?.comments ? truncate(x.comments[0]?.msg) : '' : null}
+                                    smallDescription={timeFormat(x?.updatedAt)}
+                                    image={<Avatar.Image style={{ margin: spacing.width }} size={spacing.width * 15} source={detailsStore.id?.toString() !== x?.sender_user_id?._id?.toString() ? x.sender_user_id?.userInfo?.images ? { uri: x.sender_user_id.userInfo.images } : AvatarImg : (x.receiver_user_id?.userInfo?.images ? { uri: x.receiver_user_id.userInfo.images } : AvatarImg)} />}
+                                />
+                            </TouchableOpacity>
+                            {((i > 0 && ((i % Math.floor(defaultValue.paginationLength / 2)) === 0) || (i === data.length - 1 && data.length < Math.floor(defaultValue.paginationLength / 2)))) ? <View style={{ marginBottom: spacing.height }}><Admob id={admobValue.chatPage[(i % Math.floor(defaultValue.paginationLength / 2))]} /></View> : null}
+                        </React.Fragment>
+                    ))}
+                    <ListItem
+                        title={'Sourav'}
+                        description={"MSG"}
+                        // descriptionBold={x?.viewList && x.viewList.length > 0 && !x.viewList.includes(detailsStore.id) ? x?.comments ? truncate(x.comments[0]?.msg) : '' : null}
+                        smallDescription={'12:00'}
+                        image={<Avatar.Image style={{ margin: spacing.width }} size={spacing.width * 15} source={AvatarImg} />}
+                    />
+                    {dataLoader ? <StyledButtonLoadMore labelStyle={{ color: colors.mainByColor }} mode='text' onPress={() => setPage(page + 1)}>Load More</StyledButtonLoadMore> : null}
+                </StyledScrollView>
+            </ShadowWrapperContainer>}
+        </React.Fragment>
     )
 }
 export default ChatScreen;

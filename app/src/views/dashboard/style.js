@@ -15,14 +15,15 @@ export const StyledProfileView = styled(View)`
     margin-left: ${(props) => props.theme.spacing.width}px;
 `;
 
-export const InputView = styled(View)`
+export const InputView = styled(ScrollView)`
     background-color: ${(props) => props.theme.colors[props.theme.baseColor].backgroundColor};
     padding-right: 20px;
     padding-left: 20px;
+    padding-bottom: 20px;
     margin-bottom: ${(props) => props.theme.spacing.height * 2}px;
     min-height: ${(props) => props.theme.spacing.height * 3}px;
-    justify-content: center;
     width: 100%;
+    max-height: ${(props) => props.theme.spacing.height * 80}px;
 `;
 
 export const StyledTitle = styled(Text)`

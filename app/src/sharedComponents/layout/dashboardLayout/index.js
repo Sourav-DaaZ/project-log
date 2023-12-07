@@ -28,70 +28,70 @@ const DashboardLayout = props => {
   const [updatePopup, setUpdatePopup] = useState(null);
   const [detailsData, setDetailsData] = useState(null);
 
-  useEffect(() => {
-    try {
-      if (
-        detailsStore.location.lat === 0 &&
-        detailsStore.location.long === 0 &&
-        !props.refreshing
-      ) {
-        Geolocation.getCurrentPosition(
-          ({coords}) => {
-            const varData = {
-              lat: coords.latitude,
-              long: coords.longitude,
-            };
-            dispatch(location(varData));
-          },
-          error => {
-            props.navigation.navigate(Routes.access, {
-              type: 'Location',
-              err: error.message,
-            });
-          },
-          {enableHighAccuracy: false, timeout: 50000},
-        );
-      }
-      if (
-        (configStore.appConfig === null || detailsStore.id !== '') &&
-        !props.refreshing
-      ) {
-        const param = {
-          ...(detailsStore.id !== '' && {id: detailsStore.id}),
-        };
-        OutsideAuthApi()
-          .appConfigApi(param)
-          .then(res => {
-            setUpdatePopup(res.data);
-            if (props.setChatCount) {
-              props.setChatCount(res.data?.chatCount ? res.data.chatCount : 0);
-            }
-            dispatch(configUpdate(res.data));
-          })
-          .catch(err => {
-            if (err.message && err.message?.includes('AxiosError')) {
-              props.navigation.navigate(Routes.access, {
-                type: 'Network',
-                err: err.message,
-              });
-            }
-            console.log(err);
-          });
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }, [isFocused, props.refreshing]);
+  // useEffect(() => {
+  //   try {
+  //     if (
+  //       detailsStore.location.lat === 0 &&
+  //       detailsStore.location.long === 0 &&
+  //       !props.refreshing
+  //     ) {
+  //       Geolocation.getCurrentPosition(
+  //         ({coords}) => {
+  //           const varData = {
+  //             lat: coords.latitude,
+  //             long: coords.longitude,
+  //           };
+  //           dispatch(location(varData));
+  //         },
+  //         error => {
+  //           props.navigation.navigate(Routes.access, {
+  //             type: 'Location',
+  //             err: error.message,
+  //           });
+  //         },
+  //         {enableHighAccuracy: false, timeout: 50000},
+  //       );
+  //     }
+  //     if (
+  //       (configStore.appConfig === null || detailsStore.id !== '') &&
+  //       !props.refreshing
+  //     ) {
+  //       const param = {
+  //         ...(detailsStore.id !== '' && {id: detailsStore.id}),
+  //       };
+  //       OutsideAuthApi()
+  //         .appConfigApi(param)
+  //         .then(res => {
+  //           setUpdatePopup(res.data);
+  //           if (props.setChatCount) {
+  //             props.setChatCount(res.data?.chatCount ? res.data.chatCount : 0);
+  //           }
+  //           dispatch(configUpdate(res.data));
+  //         })
+  //         .catch(err => {
+  //           if (err.message && err.message?.includes('AxiosError')) {
+  //             props.navigation.navigate(Routes.access, {
+  //               type: 'Network',
+  //               err: err.message,
+  //             });
+  //           }
+  //           console.log(err);
+  //         });
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, [isFocused, props.refreshing]);
 
-  useEffect(() => {
-    if (
-      authStore.access_token !== '' &&
-      !props?.blockDetails &&
-      detailsStore.id === ''
-    ) {
-      apiCallWithToken();
-    }
-  }, [authStore.access_token, props.refreshing, isFocused]);
+  // useEffect(() => {
+  //   if (
+  //     authStore.access_token !== '' &&
+  //     !props?.blockDetails &&
+  //     detailsStore.id === ''
+  //   ) {
+  //     apiCallWithToken();
+  //   }
+  // }, [authStore.access_token, props.refreshing, isFocused]);
 
   const apiCallWithToken = () => {
     try {

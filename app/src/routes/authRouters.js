@@ -96,26 +96,6 @@ const AuthRouters = props => {
           component={ChatScreen}
         />
         <Tab.Screen
-          name={Routes.notification}
-          options={{
-            tabBarLabel: 'Notifications',
-            headerShown: false,
-            header: () => (
-              <BottomShadow>
-                <CustomHeader logo={<StyledImage source={logoImg} />} />
-              </BottomShadow>
-            ),
-            tabBarIcon: (color, size) => (
-              <Ionicons
-                name="notifications-outline"
-                color={color}
-                size={size}
-              />
-            ),
-          }}
-          component={NotificationScreen}
-        />
-        <Tab.Screen
           name={Routes.setting}
           options={{
             tabBarLabel: 'Setting',
