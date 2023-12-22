@@ -47,9 +47,11 @@ const TokenGenaration = async (user, param, res) => {
         }
       })
       .catch((err) => {
+        console.log(err)
         return res.status(500).send(errorMsg(err));
       });
   } catch (e) {
+    console.log(e)
     return res.status(500).send(errorMsg(505));
   }
 };
@@ -104,33 +106,42 @@ const passwordChange = (data, password, res) => {
 
 const userTokenSave = (req, res) => {
   try {
-    DataModule(UserCred, "findOne", { $or: [{ userId: toSmall(req.body.userId) }, { email: toSmall(req.body.email) }] })
+    let varParamData = { phone: toSmall(req.body.userId) }
+    if (validator.isEmail(req.body.userId)) {
+      varParamData = { email: toSmall(req.body.userId) }
+    }
+    DataModule(UserCred, "findOne", varParamData)
       .then((usr) => {
         if (usr !== null) {
           return res.status(310).send(errorMsg(510));
         }
         let user = new UserCred({
-          userId: toSmall(req.body.userId),
-          email: toSmall(req.body.email),
+          ...varParamData,
           password: req.body.password,
         });
         bcrypt.hash(req.body.password, defaultConfig[defaultConfig.env].saltRound, async function (e, hash) {
           if (e) {
             return res.status(400).send(errorMsg(e));
           }
-          user.password = hash;
-          user.save((passwordEncError) => {
+          user.save((passwordEncError, savedData) => {
             if (passwordEncError) {
               return res.status(500).send(errorMsg(passwordEncError));
             }
             let infoData = new UserInfo({
-              user: user._id,
-              name: user.userId
+              user: savedData._id,
+              name: savedData.phone
             });
-            infoData.save((infoError) => {
+            infoData.save((infoError, savedInfo) => {
               if (infoError) {
                 return res.status(500).send(errorMsg(infoError));
               }
+              user.userInfo = savedInfo._id;
+              user.password = hash;
+              user.password = hash;
+              if (req.body.type) {
+                user.type = req.body.type;
+              }
+              user.save();
             })
           });
           const aToken = await tokenFunction.accessToken(user._id);
@@ -158,9 +169,13 @@ const userTokenSave = (req, res) => {
   }
 };
 
-const dataCheck = (varEmail, req, res) => {
+const dataCheck = (phone, req, res) => {
   try {
-    DataModule(RegOtps, "findOne", { email: varEmail })
+    let varParamData = { phone: phone }
+    if (validator.isEmail(phone)) {
+      varParamData = { email: phone }
+    }
+    DataModule(RegOtps, "findOne", varParamData)
       .then((eml) => {
         if (eml !== null) {
           if (eml.attempt >= defaultConfig[defaultConfig.env].otpLimit) {
@@ -180,7 +195,7 @@ const dataCheck = (varEmail, req, res) => {
           var otp_var = Math.floor(100000 + Math.random() * 900000);
           // var otp_var = 999999;
           let user_otp = {
-            email: varEmail,
+            ...varParamData,
             otp: otp_var,
             attempt: 1
           };
@@ -190,7 +205,7 @@ const dataCheck = (varEmail, req, res) => {
             if (dataCheckError) {
               return res.status(500).send(errorMsg(dataCheckError));
             }
-            sendOtpInMail(user_otp.email, user_otp.otp);
+            // sendOtpInMail(user_otp.email, user_otp.otp);
             return res.status(200).send(successMsg(undefined, 202));
           });
         }
@@ -207,8 +222,11 @@ const dataCheck = (varEmail, req, res) => {
 
 exports.loginPasswordUser = async (req, res) => {
   try {
-    const isUserEmail = validator.isEmail(toSmall(req.body.userId));
-    DataModule(UserCred, "findOne", isUserEmail ? { email: toSmall(req.body.userId) } : { userId: toSmall(req.body.userId) })
+    let varParamData = { phone: toSmall(req.body.userId) }
+    if (validator.isEmail(req.body.userId)) {
+      varParamData = { email: toSmall(req.body.userId) }
+    }
+    DataModule(UserCred, "findOne", varParamData)
       .then(async (user) => {
         if (user === null) {
           return res.status(400).send(errorMsg(511));
@@ -221,6 +239,7 @@ exports.loginPasswordUser = async (req, res) => {
         await TokenGenaration(user, { userId: user._id }, res);
       })
       .catch((err) => {
+        console.log(err)
         return res.status(500).send(errorMsg(err));
       });
   } catch (e) {
@@ -230,9 +249,13 @@ exports.loginPasswordUser = async (req, res) => {
 
 exports.loginOtpUser = function (req, res) {
   try {
+    let varParamData = { phone: toSmall(req.body.userId) }
+    if (validator.isEmail(req.body.userId)) {
+      varParamData = { email: toSmall(req.body.userId) }
+    }
     fetchCredFromId(req.body.userId)
       .then((data) => {
-        DataModule(RegOtps, "findOne", { email: data.email })
+        DataModule(RegOtps, "findOne", varParamData)
           .then((eml) => {
             if (eml === null) {
               return res.status(404).send(errorMsg(508));
@@ -257,7 +280,7 @@ exports.loginOtpUser = function (req, res) {
               if (dataError) {
                 return res.status(500).send(errorMsg(dataError));
               }
-              fetchUserToken({ email: data.email }, { userId: data.id }, res);
+              fetchUserToken({ phone: data.userId }, { userId: data.id }, res);
             });
           })
           .catch((err) => {
@@ -282,13 +305,7 @@ exports.emailCheck = function (req, res) {
 
 exports.userIDCheck = function (req, res) {
   try {
-    fetchCredFromId(req.body.userId)
-      .then((data) => {
-        dataCheck(data.email, req, res);
-      })
-      .catch((err) => {
-        return res.status(500).send(errorMsg(err));
-      });
+    dataCheck(toSmall(req.body.userId), req, res);
   } catch (e) {
     return res.status(500).send(errorMsg(505));
   }
@@ -296,7 +313,11 @@ exports.userIDCheck = function (req, res) {
 
 exports.registerUser = function (req, res) {
   try {
-    DataModule(RegOtps, "findOne", { email: toSmall(req.body.email) })
+    let varParamData = { phone: req.body.userId }
+    if (validator.isEmail(req.body.userId)) {
+      varParamData = { email: req.body.userId }
+    }
+    DataModule(RegOtps, "findOne", varParamData)
       .then((data) => {
         if (data === null) {
           return res.status(404).send(errorMsg(508));
@@ -334,12 +355,12 @@ exports.registerUser = function (req, res) {
 
 exports.userCheck = function (req, res) {
   try {
-    DataModule(UserCred, "findOne", { userId: toSmall(req.body.userId) })
+    DataModule(UserCred, "findOne", { phone: toSmall(req.body.phone) })
       .then((user) => {
         if (user !== null) {
           return res.status(404).send(errorMsg(518));
         }
-        if (toSmall(req.body.userId).indexOf(' ') >= 0) {
+        if (toSmall(req.body.phone).indexOf(' ') >= 0) {
           return res.status(404).send(errorMsg(531));
         }
         return res.status(200).send(successMsg(undefined, 203));
@@ -354,7 +375,7 @@ exports.userCheck = function (req, res) {
 
 exports.changeUserid = function (req, res) {
   try {
-    DataModule(UserCred, "findOne", { userId: toSmall(req.body.userId) })
+    DataModule(UserCred, "findOne", { phone: toSmall(req.body.phone) })
       .then((user) => {
         if (user !== null) {
           return res.status(404).send(errorMsg(518));
@@ -429,7 +450,7 @@ exports.changePassword = (req, res) => {
   try {
     fetchCredFromId(req.body.user)
       .then((data) => {
-        DataModule(RegOtps, "findOne", { email: data.email })
+        DataModule(RegOtps, "findOne", { phone: data.phone })
           .then((eml) => {
             if (eml === null) {
               return res.status(404).send(errorMsg(508));

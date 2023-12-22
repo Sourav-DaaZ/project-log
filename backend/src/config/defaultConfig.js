@@ -25,7 +25,7 @@ const config = {
     port: 443,
     nPort: 80,
     mongoUri:
-      "mongodb://localhost:27017/PROJECTX",
+      "mongodb://localhost:27017/project",
     s3ServerHost: "https://yarifi.s3.ap-south-1.amazonaws.com/",
     s3DelsteServerHost: "https://yarifi.s3.amazonaws.com/",
     gmailId: "",

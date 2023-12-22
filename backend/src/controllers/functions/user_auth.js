@@ -22,14 +22,10 @@ const { verifyUserOption } = require("../../config/defaultConfig");
 
 exports.userVerification = function (req, res) {
   try {
-    if (!(!IsPresent(req.body, ["userId"]) || !IsPresent(req.body, ["email"]))) {
-      return res.status(400).send(IsPresent(req.body, ["Email / UserId"]));
+    if (!(!IsPresent(req.body, ["userId"]))) {
+      return res.status(400).send(IsPresent(req.body, ["userId"]));
     }
-    if (!IsPresent(req.body, ["userId"])) {
-      userIDCheck(req, res);
-    } else if (!IsPresent(req.body, ["email"])) {
-      emailCheck(req, res);
-    }
+    userIDCheck(req, res);
   } catch (e) {
     return res.status(500).send(errorMsg(505));
   }
@@ -48,8 +44,8 @@ exports.userIdCheck = function (req, res) {
 
 exports.registerUser = function (req, res) {
   try {
-    if (IsPresent(req.body, ["otp", "email", "userId", "password"])) {
-      return res.status(400).send(IsPresent(req.body, ["otp", "email", "userId", "password"]));
+    if (IsPresent(req.body, ["otp", "userId", "password"])) {
+      return res.status(400).send(IsPresent(req.body, ["otp", "userId", "password"]));
     }
     registerUser(req, res);
   } catch (e) {

@@ -5,13 +5,12 @@ var validator = require("validator");
 
 exports.fetchCredFromId = (id) => {
   try {
-    const isUserEmail = validator.isEmail(toSmall(id));
-    const data = {
-      ...(isUserEmail && { email: toSmall(id) }),
-      ...(!isUserEmail && { userId: toSmall(id) }),
-    };
+    let varParamData = { phone: toSmall(id) }
+    if (validator.isEmail(id)) {
+      varParamData = { email: toSmall(id) }
+    }
     return new Promise((resolve, reject) => {
-      DataModule(UserCred, "findOne", data)
+      DataModule(UserCred, "findOne", varParamData)
         .then((eml) => {
           if (eml === null) {
             reject(511);

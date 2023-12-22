@@ -52,11 +52,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-try {
-  app.use('/', express.static(path.join(__dirname, '../../yarifi_web')));
-} catch (e) {
-  console.log(e);
-}
+
 app.use("/api", router.loginRouter);
 app.use("/api", router.dashboardRouter);
 app.use("/uploads", express.static(publicDir));

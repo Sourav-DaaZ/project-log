@@ -5,23 +5,10 @@ const Schema = mongoose.Schema;
 
 const userCredSchema = new Schema(
   {
-    userId: {
-      type: String,
-      required: true,
-      trim: true,
-    },
     userInfo: {
       type: Schema.Types.ObjectId,
       ref: "UserInfo",
       default: null,
-    },
-    googleId: {
-      type: String,
-      trim: true,
-    },
-    fbId: {
-      type: String,
-      trim: true,
     },
     type: {
       type: String,

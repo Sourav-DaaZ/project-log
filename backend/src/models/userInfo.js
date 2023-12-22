@@ -13,14 +13,7 @@ const userInfoSchema = new Schema(
       type: String,
       trim: true,
     },
-    enlistedCategory: [{
-      type: Schema.Types.ObjectId,
-      ref: "CategoryInfo",
-    }],
     profession: {
-      type: String,
-    },
-    subProfession: {
       type: String,
     },
     contactNumber: {
@@ -41,41 +34,8 @@ const userInfoSchema = new Schema(
       type: Boolean,
       default: true
     },
-    categoryPreference: [{
-      type: Schema.Types.ObjectId,
-      ref: "CategoryInfo",
-    }],
     gender: {
       type: String,
-    },
-    rating: {
-      totalRating: {
-        type: Number,
-        default: 0
-      },
-      numberOfUser: {
-        type: Number,
-        default: 0
-      }
-    },
-    referrals: [
-      {
-        id: {
-          type: Schema.Types.ObjectId,
-          ref: "UserCred",
-        },
-        date: { type: Date, default: Date.now }
-      }
-    ],
-    user_socials: {
-      fb_link: {
-        type: String,
-        trim: true,
-      },
-      insta_link: {
-        type: String,
-        trim: true,
-      },
     },
     images: {
       type: String,
