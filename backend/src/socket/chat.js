@@ -8,7 +8,7 @@ const {
 const { addUser, updateMsg, blockUser } = require("./coreFunction/chat");
 
 module.exports = (io) => {
-  const chatVar = "/api/v1/chat";
+  const chatVar = "/api/chat";
   io.of(chatVar).on("connect", (socket) => {
     socket.on("join", (qData, callback) => {
       try {

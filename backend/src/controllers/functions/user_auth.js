@@ -44,8 +44,8 @@ exports.userIdCheck = function (req, res) {
 
 exports.registerUser = function (req, res) {
   try {
-    if (IsPresent(req.body, ["otp", "userId", "password"])) {
-      return res.status(400).send(IsPresent(req.body, ["otp", "userId", "password"]));
+    if (IsPresent(req.body, ["otp", "userId", "password","type"])) {
+      return res.status(400).send(IsPresent(req.body, ["otp", "userId", "password","type"]));
     }
     registerUser(req, res);
   } catch (e) {
@@ -56,7 +56,7 @@ exports.registerUser = function (req, res) {
 exports.loginUser = function (req, res) {
   try {
     const errorIndex = ApiValidationArr([
-      IsPresent(req.body, ["userId"]),
+      IsPresent(req.body, ["userId", "type"]),
       req.body.otp && req.body.password,
       !req.body.otp && !req.body.password,
       !req.body.otp && req.body.password,
@@ -64,7 +64,7 @@ exports.loginUser = function (req, res) {
     ]);
     switch (errorIndex) {
       case 0:
-        return res.status(400).send(IsPresent(req.body, ["userId"]));
+        return res.status(400).send(IsPresent(req.body, ["userId","type"]));
 
       case 1:
         return res.status(400).send(errorMsg(513));

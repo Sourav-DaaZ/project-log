@@ -10,6 +10,11 @@ const userCredSchema = new Schema(
       ref: "UserInfo",
       default: null,
     },
+    manager: {
+      type: Schema.Types.ObjectId,
+      ref: "UserCred",
+      default: null,
+    },
     type: {
       type: String,
       required: true,

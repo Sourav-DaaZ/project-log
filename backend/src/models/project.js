@@ -3,39 +3,30 @@ const { errorCode } = require("../config/codeConfig");
 
 const Schema = mongoose.Schema;
 
-const userInfoSchema = new Schema(
+const projectSchema = new Schema(
   {
-    user: {
+    owner: {
       type: Schema.Types.ObjectId,
       ref: "UserCred",
+      require: true
     },
     name: {
       type: String,
       trim: true,
     },
-    profession: {
+    details: {
       type: String,
     },
-    contactNumber: {
+    shift: {
       type: String,
     },
-    contactAddress: {
-      type: String,
-    },
-    age: {
-      type: Number,
-      default: 0
-    },
-    gender: {
-      type: String,
-    },
-    images: {
+    location: {
       type: String,
     },
   },
   { timestamps: true }
 );
 
-const UserInfo = mongoose.model("UserInfo", userInfoSchema);
+const Project = mongoose.model("Project", projectSchema);
 
-module.exports = UserInfo;
+module.exports = Project;

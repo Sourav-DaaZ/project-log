@@ -117,7 +117,9 @@ const userTokenSave = (req, res) => {
         }
         let user = new UserCred({
           ...varParamData,
+          ...req.body.manager && { manager: req.body.manager },
           password: req.body.password,
+          type: req.body.type,
         });
         bcrypt.hash(req.body.password, defaultConfig[defaultConfig.env].saltRound, async function (e, hash) {
           if (e) {
@@ -192,8 +194,8 @@ const dataCheck = (phone, req, res) => {
           }
         } else {
           // random otp genarate
-          var otp_var = Math.floor(100000 + Math.random() * 900000);
-          // var otp_var = 999999;
+          // var otp_var = Math.floor(100000 + Math.random() * 900000);
+          var otp_var = 999999;
           let user_otp = {
             ...varParamData,
             otp: otp_var,
@@ -222,9 +224,9 @@ const dataCheck = (phone, req, res) => {
 
 exports.loginPasswordUser = async (req, res) => {
   try {
-    let varParamData = { phone: toSmall(req.body.userId) }
+    let varParamData = { $and: [{ phone: toSmall(req.body.userId) }, { type: toSmall(req.body.type) }] }
     if (validator.isEmail(req.body.userId)) {
-      varParamData = { email: toSmall(req.body.userId) }
+      varParamData = { $and: [{ email: toSmall(req.body.userId) }, { type: toSmall(req.body.type) }] }
     }
     DataModule(UserCred, "findOne", varParamData)
       .then(async (user) => {
@@ -249,9 +251,9 @@ exports.loginPasswordUser = async (req, res) => {
 
 exports.loginOtpUser = function (req, res) {
   try {
-    let varParamData = { phone: toSmall(req.body.userId) }
+    let varParamData = { $and: [{ phone: toSmall(req.body.userId) }, { type: toSmall(req.body.type) }] }
     if (validator.isEmail(req.body.userId)) {
-      varParamData = { email: toSmall(req.body.userId) }
+      varParamData = { $and: [{ email: toSmall(req.body.userId) }, { type: toSmall(req.body.type) }] }
     }
     fetchCredFromId(req.body.userId)
       .then((data) => {
@@ -313,10 +315,11 @@ exports.userIDCheck = function (req, res) {
 
 exports.registerUser = function (req, res) {
   try {
-    let varParamData = { phone: req.body.userId }
+    let varParamData = { phone: toSmall(req.body.managerUId ? req.body.managerUId : req.body.userId) }
     if (validator.isEmail(req.body.userId)) {
-      varParamData = { email: req.body.userId }
+      varParamData = { email: toSmall(req.body.managerUId ? req.body.managerUId : req.body.userId) }
     }
+    console.log(varParamData)
     DataModule(RegOtps, "findOne", varParamData)
       .then((data) => {
         if (data === null) {
