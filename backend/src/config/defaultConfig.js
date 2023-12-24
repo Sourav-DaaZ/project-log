@@ -25,7 +25,7 @@ const config = {
     port: 443,
     nPort: 80,
     mongoUri:
-      "mongodb://localhost:27017/project",
+      "mongodb://root:root@ac-2awylsx-shard-00-00.ggkevot.mongodb.net:27017,ac-2awylsx-shard-00-01.ggkevot.mongodb.net:27017,ac-2awylsx-shard-00-02.ggkevot.mongodb.net:27017/?replicaSet=atlas-xnzvou-shard-0&ssl=true&authSource=admin",
     s3ServerHost: "https://yarifi.s3.ap-south-1.amazonaws.com/",
     s3DelsteServerHost: "https://yarifi.s3.amazonaws.com/",
     gmailId: "",
@@ -54,7 +54,7 @@ const config = {
     port: 443,
     nPort: 80,
     mongoUri:
-      'mongodb://admin:59zXed4Gp2IJkKgD@ac-fjd7sdw-shard-00-00.lfbh8cc.mongodb.net:27017,ac-fjd7sdw-shard-00-01.lfbh8cc.mongodb.net:27017,ac-fjd7sdw-shard-00-02.lfbh8cc.mongodb.net:27017/yarifi?replicaSet=atlas-aadpes-shard-0&ssl=true&authSource=admin',
+      'mongodb://root:root@ac-2awylsx-shard-00-00.ggkevot.mongodb.net:27017,ac-2awylsx-shard-00-01.ggkevot.mongodb.net:27017,ac-2awylsx-shard-00-02.ggkevot.mongodb.net:27017/?replicaSet=atlas-xnzvou-shard-0&ssl=true&authSource=admin',
     s3ServerHost: "https://yarifi.s3.ap-south-1.amazonaws.com/",
     s3DelsteServerHost: "https://yarifi.s3.amazonaws.com/",
     gmailId: "help.yarifi@gmail.com",
