@@ -7,7 +7,8 @@ const {
   userUpdate,
   createCategory,
   searchUser,
-  getReview,
+  searchProject,
+  searchTask,
   deleteUser,
   firebaseToken,
   myNotification,
@@ -56,9 +57,16 @@ exports.searchUser = function (req, res) {
 };
 
 
-exports.getReview = function (req, res) {
+exports.searchProject = function (req, res) {
   try {
-    getReview(req, res);
+    searchProject(req, res);
+  } catch (e) {
+    return res.status(500).send(errorMsg(505));
+  }
+};
+exports.searchTask = function (req, res) {
+  try {
+    searchTask(req, res);
   } catch (e) {
     return res.status(500).send(errorMsg(505));
   }
@@ -101,8 +109,8 @@ exports.firebaseToken = function (req, res) {
 
 exports.updateProject = function (req, res) {
   try {
-    if (IsPresent(req.body, ["id"])) {
-      return res.status(400).send(IsPresent(req.body, ["id"]));
+    if (req.body.id && IsPresent(req.body, ["id", "assignedTo"])) {
+      return res.status(400).send(IsPresent(req.body, ["id","assignedTo"]));
     }
     updateProject(req, res);
   } catch (e) {
@@ -112,8 +120,8 @@ exports.updateProject = function (req, res) {
 
 exports.updateTask = function (req, res) {
   try {
-    if (IsPresent(req.body, ["id"])) {
-      return res.status(400).send(IsPresent(req.body, ["id"]));
+    if (!req.body.id && IsPresent(req.body, ["assignedTo", "project"])) {
+      return res.status(400).send(IsPresent(req.body, ["id","assignedTo", "project"]));
     }
     updateTask(req, res);
   } catch (e) {

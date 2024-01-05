@@ -15,8 +15,10 @@ const taskSchema = new Schema(
       ref: "UserCred",
       require: true
     },
-    task: {
-      type: String,
+    assignedTo: {
+      type: Schema.Types.ObjectId,
+      ref: "UserCred",
+      require: true
     },
     name: {
       type: String,
@@ -25,6 +27,12 @@ const taskSchema = new Schema(
     details: {
       type: String,
     },
+    status: {
+      type: String,
+    },
+    image: {
+      type: String
+    }
   },
   { timestamps: true }
 );

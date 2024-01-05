@@ -29,6 +29,18 @@ const userInfoSchema = new Schema(
     gender: {
       type: String,
     },
+    companyName: {
+      type: String,
+    },
+    companyCapacity: {
+      type: String,
+    },
+    payroll: {
+      type: String,
+    },
+    workHr: {
+      type: Number,
+    },
     images: {
       type: String,
     },

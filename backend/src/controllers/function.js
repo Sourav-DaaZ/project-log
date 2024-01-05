@@ -103,6 +103,14 @@ module.exports = {
     controller: "dashboard_auth",
     function: "myNotification",
   },
+  search_project: {
+    controller: "dashboard_auth",
+    function: "searchProject",
+  },
+  search_task: {
+    controller: "dashboard_auth",
+    function: "searchTask",
+  },
   my_chat_list: {
     controller: "booking_auth",
     function: "myChatList",

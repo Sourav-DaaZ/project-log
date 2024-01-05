@@ -11,7 +11,7 @@ const { userNotification } = require("../../../services/notifications");
 const userUpdatePatch = (vardata, req) => {
   try {
     for (const [key, value] of Object.entries(req)) {
-      if (["name", "profession", "categoryPreference", "gender", "contactNumber", "contactAddress", "age"].includes(key)) {
+      if (["name", "profession", "categoryPreference", "gender", "contactNumber", "contactAddress", "age", "companyName", "companyCapacity", "payroll", "workHr"].includes(key)) {
         vardata[key] = value;
       }
     }
@@ -104,7 +104,7 @@ exports.userUpdate = (req, res) => {
                   return res.status(500).send(errorMsg(updateError));
                 }
                 for (const [key, value] of Object.entries(req.body)) {
-                  if (["name", "profession", "gender", "contactNumber", "contactAddress", "age"].includes(key)) {
+                  if (["name", "profession", "gender", "contactNumber", "contactAddress", "age", "companyName", "companyCapacity", "payroll", "workHr"].includes(key)) {
                     data[key] = value;
                   } else if (["images"].includes(key)) {
                     let dataVal = '';
@@ -237,8 +237,16 @@ exports.updateProject = (req, res) => {
         if (data === null) {
           let userData = new Project();
           for (const [key, value] of Object.entries(req.body)) {
-            if (["name", "details", "shift", "location"].includes(key)) {
+            if (["name", "details", "shift", "location", "assignedTo"].includes(key)) {
               userData[key] = value;
+            } else if (req?.body?.image && key === "image") {
+              let dataVal = '';
+              if (req.body.image?.includes('data:image')) {
+                dataVal = await updateToFile(req.user._id, req.body.image);
+              } else {
+                dataVal = req.body.image;
+              }
+              userData.image = dataVal;
             }
           }
           userData.owner = req.user._id;
@@ -250,8 +258,16 @@ exports.updateProject = (req, res) => {
           });
         } else {
           for (const [key, value] of Object.entries(req.body)) {
-            if (["name", "details", "shift", "location"].includes(key)) {
+            if (["name", "details", "shift", "location", "assignedTo"].includes(key)) {
               data[key] = value;
+            } else if (req?.body?.image && key === "image") {
+              let dataVal = '';
+              if (req.body.image?.includes('data:image')) {
+                dataVal = await updateToFile(req.user._id, req.body.image);
+              } else {
+                dataVal = req.body.image;
+              }
+              data.image = dataVal;
             }
           }
           data.save((dErr) => {
@@ -277,8 +293,16 @@ exports.updateTask = (req, res) => {
         if (data === null) {
           let userData = new Task();
           for (const [key, value] of Object.entries(req.body)) {
-            if (["name", "details"].includes(key)) {
+            if (["name", "details", "project", "assignedTo", "status"].includes(key)) {
               userData[key] = value;
+            } else if (req?.body?.image && key === "image") {
+              let dataVal = '';
+              if (req.body.image?.includes('data:image')) {
+                dataVal = await updateToFile(req.user._id, req.body.image);
+              } else {
+                dataVal = req.body.image;
+              }
+              userData.image = dataVal;
             }
           }
           userData.owner = req.user._id;
@@ -290,8 +314,16 @@ exports.updateTask = (req, res) => {
           });
         } else {
           for (const [key, value] of Object.entries(req.body)) {
-            if (["name", "details"].includes(key)) {
+            if (["name", "details", "project", "assignedTo", "status"].includes(key)) {
               data[key] = value;
+            } else if (req?.body?.image && key === "image") {
+              let dataVal = '';
+              if (req.body.image?.includes('data:image')) {
+                dataVal = await updateToFile(req.user._id, req.body.image);
+              } else {
+                dataVal = req.body.image;
+              }
+              data.image = dataVal;
             }
           }
           data.save((dErr) => {
@@ -421,3 +453,44 @@ exports.searchUser = (req, res) => {
     return res.status(500).send(errorMsg(505));
   }
 };
+
+
+exports.searchProject = (req, res) => {
+  try {
+    DataModulePopulate(Project.find({ $or: [{ assignedTo: req?.user?._id }, { owner: req?.user?._id }] }))
+      .then(async (data) => {
+        if (data === null) {
+          return res.status(400).send(errorMsg(520));
+        } else {
+          return await res.status(200).send(successMsg(data, 201));
+        }
+      })
+      .catch((err) => {
+        return res.status(500).send(errorMsg(err));
+      });
+  } catch (e) {
+    return res.status(500).send(errorMsg(505));
+  }
+};
+
+
+
+exports.searchTask = (req, res) => {
+  try {
+    DataModulePopulate(Task.find(req.query.id ? { project: req.query.id } : { owner: req?.user?._id }))
+      .then(async (data) => {
+        if (data === null) {
+          return res.status(400).send(errorMsg(520));
+        } else {
+          return await res.status(200).send(successMsg(data, 201));
+        }
+      })
+      .catch((err) => {
+        return res.status(500).send(errorMsg(err));
+      });
+  } catch (e) {
+    return res.status(500).send(errorMsg(e));
+  }
+};
+
+

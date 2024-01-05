@@ -52,6 +52,15 @@ router.get("/my_notification", (req, res) => {
   const action = "my_notification";
   controllerObj.controller(req, res, action);
 });
+router.get("/search_project", auth, (req, res) => {
+  const action = "search_project";
+  controllerObj.controller(req, res, action);
+});
+
+router.get("/search_task", auth, (req, res) => {
+  const action = "search_task";
+  controllerObj.controller(req, res, action);
+});
 
 
 module.exports = router;

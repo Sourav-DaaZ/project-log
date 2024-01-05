@@ -10,6 +10,11 @@ const projectSchema = new Schema(
       ref: "UserCred",
       require: true
     },
+    assignedTo: {
+      type: Schema.Types.ObjectId,
+      ref: "UserCred",
+      require: true
+    },
     name: {
       type: String,
       trim: true,
@@ -17,7 +22,7 @@ const projectSchema = new Schema(
     details: {
       type: String,
     },
-    shift: {
+    image: {
       type: String,
     },
     location: {

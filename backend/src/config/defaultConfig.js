@@ -25,7 +25,8 @@ const config = {
     port: 443,
     nPort: 80,
     mongoUri:
-      "mongodb://root:root@ac-2awylsx-shard-00-00.ggkevot.mongodb.net:27017,ac-2awylsx-shard-00-01.ggkevot.mongodb.net:27017,ac-2awylsx-shard-00-02.ggkevot.mongodb.net:27017/?replicaSet=atlas-xnzvou-shard-0&ssl=true&authSource=admin",
+      // "mongodb://root:root@ac-2awylsx-shard-00-00.ggkevot.mongodb.net:27017,ac-2awylsx-shard-00-01.ggkevot.mongodb.net:27017,ac-2awylsx-shard-00-02.ggkevot.mongodb.net:27017/?replicaSet=atlas-xnzvou-shard-0&ssl=true&authSource=admin",
+      "mongodb://localhost:27017/project",
     s3ServerHost: "https://yarifi.s3.ap-south-1.amazonaws.com/",
     s3DelsteServerHost: "https://yarifi.s3.amazonaws.com/",
     gmailId: "",
@@ -35,7 +36,7 @@ const config = {
     tempExpTime: 60 * 60 * 24 * 30, //30days
     saltRound: 10,
     accessTokenSecret: '43bbdb701e3e9d343ace43ff9df842451109039c3b75df25d9b883ded0512d336bdcaeae5b68ccf763279d9ea0aa739db668d7ef2adc9c92b3ceb19de9621ce7',
-    accessTokenTime: '30m',
+    accessTokenTime: '3000m',
     refressTokenSecret: '6ad5e0898ed3fff0b0c48a2b9231ba60d0a55b2b5d4bfda8a173b9616cfc686ccd3009306c8425d981fcbebd1e4dade2ea0a2b95bd3104161ad0b998f7f9703c',
     refreshTokenTime: '60d',
     jwtSecret: "efrtergfdfgfs#dfssdsdfcjfyretfds",
