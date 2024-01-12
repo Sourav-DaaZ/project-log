@@ -3,6 +3,10 @@ module.exports = {
     controller: "user_auth",
     function: "registerUser",
   },
+  register_empl: {
+    controller: "user_auth",
+    function: "registerEmpl",
+  },
   user_verification: {
     controller: "user_auth",
     function: "userVerification",

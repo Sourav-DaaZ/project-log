@@ -14,6 +14,11 @@ router.post("/register_user", async (req, res) => {
   controllerObj.controller(req, res, action);
 });
 
+router.post("/register_empl", async (req, res) => {
+  const action = "register_empl";
+  controllerObj.controller(req, res, action);
+});
+
 router.post("/login", async (req, res) => {
   const action = "login_user";
   controllerObj.controller(req, res, action);

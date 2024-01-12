@@ -1,7 +1,7 @@
 const {
   loginPasswordUser,
   loginOtpUser,
-  emailCheck,
+  registerEmpl,
   registerUser,
   userCheck,
   requestForChangePassword,
@@ -48,6 +48,16 @@ exports.registerUser = function (req, res) {
       return res.status(400).send(IsPresent(req.body, ["otp", "userId", "password","type"]));
     }
     registerUser(req, res);
+  } catch (e) {
+    return res.status(500).send(errorMsg(505));
+  }
+};
+exports.registerEmpl = function (req, res) {
+  try {
+    if (IsPresent(req.body, ["userId", "password","type", "manager"])) {
+      return res.status(400).send(IsPresent(req.body, ["userId", "password","type", "manager"]));
+    }
+    registerEmpl(req, res);
   } catch (e) {
     return res.status(500).send(errorMsg(505));
   }

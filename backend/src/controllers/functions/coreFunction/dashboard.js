@@ -11,7 +11,7 @@ const { userNotification } = require("../../../services/notifications");
 const userUpdatePatch = (vardata, req) => {
   try {
     for (const [key, value] of Object.entries(req)) {
-      if (["name", "profession", "categoryPreference", "gender", "contactNumber", "contactAddress", "age", "companyName", "companyCapacity", "payroll", "workHr"].includes(key)) {
+      if (["name", "profession", "categoryPreference", "gender", "contactNumber","project", "contactAddress", "age", "companyName", "companyCapacity", "payroll", "workHr"].includes(key)) {
         vardata[key] = value;
       }
     }
@@ -33,6 +33,7 @@ exports.userInfo = (req, res) => {
           if (data?.userInfo) {
             let varData = data.userInfo;
             varData._doc.type = data.type;
+            varData._doc.email = data.email;
             varData._doc.userId = data.userId;
             return res.status(200).send(successMsg(varData, 201));
           } else {
@@ -237,7 +238,7 @@ exports.updateProject = (req, res) => {
         if (data === null) {
           let userData = new Project();
           for (const [key, value] of Object.entries(req.body)) {
-            if (["name", "details", "shift", "location", "assignedTo"].includes(key)) {
+            if (["name", "details", "shift", "assignedTo", "lat", "long"].includes(key)) {
               userData[key] = value;
             } else if (req?.body?.image && key === "image") {
               let dataVal = '';
@@ -258,7 +259,7 @@ exports.updateProject = (req, res) => {
           });
         } else {
           for (const [key, value] of Object.entries(req.body)) {
-            if (["name", "details", "shift", "location", "assignedTo"].includes(key)) {
+            if (["name", "details", "shift", "assignedTo", "lat", "long"].includes(key)) {
               data[key] = value;
             } else if (req?.body?.image && key === "image") {
               let dataVal = '';
@@ -349,7 +350,7 @@ exports.updateClock = (req, res) => {
         if (data === null) {
           let userData = new Clock();
           for (const [key, value] of Object.entries(req.body)) {
-            if (["checkIn", "clockOut", "manager", "isPending", "task", "project", "location"].includes(key)) {
+            if (["checkIn", "clockOut", "manager", "isPending", "task", "project", "lat", "long"].includes(key)) {
               userData[key] = value;
             } else if (["image"].includes(key)) {
               let dataVal = '';
@@ -380,7 +381,7 @@ exports.updateClock = (req, res) => {
           });
         } else {
           for (const [key, value] of Object.entries(req.body)) {
-            if (["checkIn", "clockOut", "manager", "isPending", "task", "project", "location"].includes(key)) {
+            if (["checkIn", "clockOut", "manager", "isPending", "task", "project", "lat", "long"].includes(key)) {
               data[key] = value;
             } else if (["image"].includes(key)) {
               let dataVal = '';
@@ -436,6 +437,7 @@ exports.searchUser = (req, res) => {
               varData._doc.type = x.type;
               varData._doc.userId = x.userId;
               varData._doc.manager = x.manager;
+              varData._doc.email = x.email;
             } else {
               varData.user = x._id;
               varData.type = x.type;

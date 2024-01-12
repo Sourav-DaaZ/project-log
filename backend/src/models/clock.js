@@ -44,7 +44,10 @@ const clockSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Project",
     },
-    location: {
+    lat: {
+      type: String,
+    },
+    long: {
       type: String,
     },
     image: {

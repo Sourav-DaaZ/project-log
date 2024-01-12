@@ -16,6 +16,10 @@ const userInfoSchema = new Schema(
     profession: {
       type: String,
     },
+    project: {
+      type: Schema.Types.ObjectId,
+      ref: "Project",
+    },
     contactNumber: {
       type: String,
     },
@@ -23,7 +27,7 @@ const userInfoSchema = new Schema(
       type: String,
     },
     age: {
-      type: Number,
+      type: String,
       default: 0
     },
     gender: {

@@ -27,7 +27,7 @@ const TokenGenaration = async (user, param, res) => {
           let token = new TokenModal();
           token.userId = userId;
           token.isLogin = true;
-          token.tokens = [{ access_token: aToken, refresh_token: refreshToken }];
+          token.tokens = [{ access_token: aToken, refresh_token: refreshToken, user: user._id }];
           token.save((tokenError, tokenData) => {
             if (tokenError) {
               return res.status(400).send(errorMsg(tokenError));
@@ -36,7 +36,7 @@ const TokenGenaration = async (user, param, res) => {
           });
         } else {
           usrdata.isLogin = true;
-          usrdata.tokens = [{ access_token: aToken, refresh_token: refreshToken }];
+          usrdata.tokens = [{ access_token: aToken, refresh_token: refreshToken, user: user._id }];
 
           usrdata.save((usrTokenError, usrTokenData) => {
             if (usrTokenError) {
@@ -119,7 +119,7 @@ const userTokenSave = (req, res) => {
           ...varParamData,
           ...req.body.manager && { manager: req.body.manager },
           password: req.body.password,
-          type: req.body.type,
+          type: toSmall(req.body.type),
         });
         bcrypt.hash(req.body.password, defaultConfig[defaultConfig.env].saltRound, async function (e, hash) {
           if (e) {
@@ -130,6 +130,7 @@ const userTokenSave = (req, res) => {
               return res.status(500).send(errorMsg(passwordEncError));
             }
             let infoData = new UserInfo({
+              ...req.body,
               user: savedData._id,
               name: savedData.phone
             });
@@ -141,7 +142,7 @@ const userTokenSave = (req, res) => {
               user.password = hash;
               user.password = hash;
               if (req.body.type) {
-                user.type = req.body.type;
+                user.type = toSmall(req.body.type);
               }
               user.save();
             })
@@ -152,7 +153,7 @@ const userTokenSave = (req, res) => {
           let token = new TokenModal();
           token.userId = user_id;
           token.isLogin = true;
-          token.tokens = [{ access_token: aToken, refresh_token: refreshToken }];
+          token.tokens = [{ access_token: aToken, refresh_token: refreshToken, user: user._id }];
           token.save((tokenGenError) => {
             if (tokenGenError) {
               return res.status(500).send(errorMsg(tokenGenError));
@@ -351,6 +352,14 @@ exports.registerUser = function (req, res) {
       .catch((err) => {
         return res.status(500).send(errorMsg(err));
       });
+  } catch (e) {
+    return res.status(500).send(errorMsg(505));
+  }
+};
+
+exports.registerEmpl = function (req, res) {
+  try {
+    userTokenSave(req, res);
   } catch (e) {
     return res.status(500).send(errorMsg(505));
   }

@@ -17,8 +17,7 @@ const userCredSchema = new Schema(
     },
     type: {
       type: String,
-      required: true,
-      default: 'user',
+      required: true
     },
     email: {
       type: String,

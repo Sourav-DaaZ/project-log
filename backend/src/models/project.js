@@ -25,7 +25,10 @@ const projectSchema = new Schema(
     image: {
       type: String,
     },
-    location: {
+    lat: {
+      type: String,
+    },
+    long: {
       type: String,
     },
   },
