@@ -15,7 +15,9 @@ const {
   findReviewById,
   updateProject,
   updateTask,
-  updateClock
+  updateClock,
+  chats,
+  reports
 } = require("./coreFunction/dashboard");
 const { IsPresent, errorMsg } = require("../../utils");
 const ChatComments = require("../../models/chatComments");
@@ -128,6 +130,16 @@ exports.updateTask = function (req, res) {
     return res.status(500).send(errorMsg(505));
   }
 };
+exports.reports = function (req, res) {
+  try {
+    if (IsPresent(req.query, ["date"])) {
+      return res.status(400).send(IsPresent(req.query, ["date"]));
+    }
+    reports(req, res);
+  } catch (e) {
+    return res.status(500).send(errorMsg(505));
+  }
+};
 
 exports.updateClock = function (req, res) {
   try {
@@ -143,6 +155,13 @@ exports.updateClock = function (req, res) {
 exports.myNotification = function (req, res) {
   try {
     myNotification(req, res);
+  } catch (e) {
+    return res.status(500).send(errorMsg(505));
+  }
+};
+exports.chats = function (req, res) {
+  try {
+    chats(req, res);
   } catch (e) {
     return res.status(500).send(errorMsg(505));
   }

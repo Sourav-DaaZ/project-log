@@ -62,5 +62,14 @@ router.get("/search_task", auth, (req, res) => {
   controllerObj.controller(req, res, action);
 });
 
+router.get("/chats", auth, (req, res) => {
+  const action = "chats";
+  controllerObj.controller(req, res, action);
+});
+router.get("/reports", auth, (req, res) => {
+  const action = "reports";
+  controllerObj.controller(req, res, action);
+});
+
 
 module.exports = router;

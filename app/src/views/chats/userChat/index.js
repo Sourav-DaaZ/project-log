@@ -65,7 +65,7 @@ const UserChat = props => {
   const [newChatloader, setNewChatloader] = useState(false);
   const [isBlocked, setIsBlocked] = useState(false);
   const [show, setShow] = useState('');
-  const socket = io(API.baseUrls[API.currentEnv] + API.noAuthUrls.ChatSocket, {
+  const socket = io(API.baseUrls[API.currentEnv] + '/chat', {
     transports: ['websocket'],
     upgrade: false,
     // forceNew: true,

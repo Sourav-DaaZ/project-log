@@ -7,6 +7,7 @@ const Notification = require("../../../models/notification");
 const FirebaseToken = require("../../../models/firebaseToken");
 const { DataModule, errorMsg, successMsg, removeKeyForReturn, DataModulePopulate, paginationData, updateToFile, getRandomFileName } = require("../../../utils");
 const { userNotification } = require("../../../services/notifications");
+const ChatComments = require("../../../models/chatComments");
 
 const userUpdatePatch = (vardata, req) => {
   try {
@@ -18,6 +19,17 @@ const userUpdatePatch = (vardata, req) => {
     return vardata;
   } catch (e) {
     return vardata;
+  }
+};
+
+const commentsRemove = (data) => {
+  try {
+    data?.forEach((element) => {
+      element.comments = element.comments[element.comments.length - 1];
+    });
+    return data;
+  } catch (e) {
+    return data;
   }
 };
 
@@ -350,7 +362,7 @@ exports.updateClock = (req, res) => {
         if (data === null) {
           let userData = new Clock();
           for (const [key, value] of Object.entries(req.body)) {
-            if (["checkIn", "clockOut", "manager", "isPending", "task", "project", "lat", "long"].includes(key)) {
+            if (["checkIn", "clockOut", "manager", "isPending", "task", "project"].includes(key)) {
               userData[key] = value;
             } else if (["image"].includes(key)) {
               let dataVal = '';
@@ -381,7 +393,7 @@ exports.updateClock = (req, res) => {
           });
         } else {
           for (const [key, value] of Object.entries(req.body)) {
-            if (["checkIn", "clockOut", "manager", "isPending", "task", "project", "lat", "long"].includes(key)) {
+            if (["checkIn", "clockOut", "manager", "isPending", "task", "project"].includes(key)) {
               data[key] = value;
             } else if (["image"].includes(key)) {
               let dataVal = '';
@@ -486,6 +498,75 @@ exports.searchTask = (req, res) => {
         } else {
           return await res.status(200).send(successMsg(data, 201));
         }
+      })
+      .catch((err) => {
+        return res.status(500).send(errorMsg(err));
+      });
+  } catch (e) {
+    return res.status(500).send(errorMsg(e));
+  }
+};
+
+exports.chats = (req, res) => {
+  try {
+    DataModulePopulate(
+      ChatComments.find({
+        $or: [
+          { sender_user_id: req.user._id },
+          { receiver_user_id: req.user._id },
+        ],
+      })
+        .populate({
+          path: "sender_user_id receiver_user_id",
+          select: "userId",
+          populate: {
+            path: "userInfo",
+            populate: {
+              path: "user",
+              select: "userId",
+            },
+          },
+        })
+        .sort({ updatedAt: -1 })
+    )
+      .then(async (data) => {
+        if (data === null) {
+          return res.status(404).send(errorMsg(520));
+        }
+        let pageData = data;
+        if(req.query.page){
+          pageData = await paginationData(data, req.query.page);
+        }
+        const varData = commentsRemove(pageData);
+        return res.status(200).send(successMsg(varData, 204));
+      })
+      .catch((err) => {
+        return res.status(500).send(errorMsg(err));
+      });
+  } catch (e) {
+    return res.status(500).send(errorMsg(505));
+  }
+};
+
+
+
+exports.reports = (req, res) => {
+  try {
+    DataModulePopulate(
+      Clock.find({"createdAt" : { $gte : new Date(req.query.date) }})
+    )
+      .then(async (data) => {
+        if (data === null) {
+          return res.status(404).send(errorMsg(520));
+        }
+        data?.map((x, i) => {
+          let varTime = new Date(x?.clockOut?.time) - new Date(x?.checkIn?.time);
+          x?.break?.map((y, i) => {
+            varTime = varTime - (new Date(y?.out) - new Date(y?.in))
+          })
+          x._doc.workHr = Math.ceil(Number(varTime) / (1000 * 60 * 60 * 24));
+        })
+        return res.status(200).send(successMsg(data, 204));
       })
       .catch((err) => {
         return res.status(500).send(errorMsg(err));

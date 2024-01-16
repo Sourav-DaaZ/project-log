@@ -11,19 +11,34 @@ const clockSchema = new Schema(
       require: true
     },
     checkIn: {
-      type: Date,
-      default: Date.now()
+      time: {
+        type: String,
+      },
+      lat: {
+        type: String,
+      },
+      long: {
+        type: String,
+      },
     },
     break: [{
       in: {
-        type: Date
+        type: String
       },
       out: {
-        type: Date
+        type: String
       }
     }],
     clockOut: {
-      type: Date
+      time: {
+        type: String,
+      },
+      lat: {
+        type: String,
+      },
+      long: {
+        type: String,
+      },
     },
     manager: {
       type: Schema.Types.ObjectId,
@@ -43,12 +58,6 @@ const clockSchema = new Schema(
     project: {
       type: Schema.Types.ObjectId,
       ref: "Project",
-    },
-    lat: {
-      type: String,
-    },
-    long: {
-      type: String,
     },
     image: {
       type: String

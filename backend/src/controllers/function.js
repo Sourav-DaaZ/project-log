@@ -71,6 +71,10 @@ module.exports = {
     controller: "dashboard_auth",
     function: "updateProject",
   },
+  chats: {
+    controller: "dashboard_auth",
+    function: "chats",
+  },
   update_task: {
     controller: "dashboard_auth",
     function: "updateTask",
@@ -82,6 +86,10 @@ module.exports = {
   search_user: {
     controller: "dashboard_auth",
     function: "searchUser",
+  },
+  reports: {
+    controller: "dashboard_auth",
+    function: "reports",
   },
   details_by_id: {
     controller: "dashboard_auth",

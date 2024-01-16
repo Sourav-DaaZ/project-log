@@ -32,7 +32,7 @@ const TokenGenaration = async (user, param, res) => {
             if (tokenError) {
               return res.status(400).send(errorMsg(tokenError));
             }
-            return res.status(201).send(successMsg(tokenData.tokens[0], 201));
+            return res.status(201).send(successMsg(token, 201));
           });
         } else {
           usrdata.isLogin = true;
@@ -42,7 +42,7 @@ const TokenGenaration = async (user, param, res) => {
             if (usrTokenError) {
               return res.status(400).send(errorMsg(usrTokenError));
             }
-            return res.status(201).send(successMsg(usrTokenData.tokens[0], 201));
+            return res.status(201).send(successMsg(usrdata, 201));
           });
         }
       })
@@ -154,13 +154,13 @@ const userTokenSave = (req, res) => {
           token.userId = user_id;
           token.isLogin = true;
           token.tokens = [{ access_token: aToken, refresh_token: refreshToken, user: user._id }];
-          token.save((tokenGenError) => {
+          token.save((tokenGenError, tokendata) => {
             if (tokenGenError) {
               return res.status(500).send(errorMsg(tokenGenError));
             }
             removeKeyForReturn(user);
             // await sendWelcomeEmail(user.email , user.name);
-            return res.status(201).send(successMsg(token.tokens[0], 201));
+            return res.status(201).send(successMsg(tokendata, 201));
           });
         });
       })
