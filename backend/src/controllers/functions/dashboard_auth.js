@@ -111,9 +111,6 @@ exports.firebaseToken = function (req, res) {
 
 exports.updateProject = function (req, res) {
   try {
-    if (req.body.id && IsPresent(req.body, ["id", "assignedTo"])) {
-      return res.status(400).send(IsPresent(req.body, ["id","assignedTo"]));
-    }
     updateProject(req, res);
   } catch (e) {
     return res.status(500).send(errorMsg(505));

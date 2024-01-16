@@ -12,8 +12,7 @@ const projectSchema = new Schema(
     },
     assignedTo: {
       type: Schema.Types.ObjectId,
-      ref: "UserCred",
-      require: true
+      ref: "UserCred"
     },
     name: {
       type: String,

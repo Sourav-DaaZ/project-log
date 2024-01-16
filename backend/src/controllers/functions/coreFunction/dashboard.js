@@ -12,7 +12,7 @@ const ChatComments = require("../../../models/chatComments");
 const userUpdatePatch = (vardata, req) => {
   try {
     for (const [key, value] of Object.entries(req)) {
-      if (["name", "profession", "categoryPreference", "gender", "contactNumber","project", "contactAddress", "age", "companyName", "companyCapacity", "payroll", "workHr"].includes(key)) {
+      if (["name", "profession", "categoryPreference", "gender", "contactNumber", "project", "contactAddress", "age", "companyName", "companyCapacity", "payroll", "workHr"].includes(key)) {
         vardata[key] = value;
       }
     }
@@ -248,6 +248,9 @@ exports.updateProject = (req, res) => {
     DataModulePopulate(Project.findOne({ _id: req.body.id }))
       .then(async (data) => {
         if (data === null) {
+          if(req.body.id){
+            return res.status(400).send(errorMsg(520));
+          }
           let userData = new Project();
           for (const [key, value] of Object.entries(req.body)) {
             if (["name", "details", "shift", "assignedTo", "lat", "long"].includes(key)) {
@@ -304,6 +307,9 @@ exports.updateTask = (req, res) => {
     DataModulePopulate(Task.findOne({ _id: req.body.id }))
       .then(async (data) => {
         if (data === null) {
+          if(req.body.id){
+            return res.status(400).send(errorMsg(520));
+          }
           let userData = new Task();
           for (const [key, value] of Object.entries(req.body)) {
             if (["name", "details", "project", "assignedTo", "status"].includes(key)) {
@@ -360,6 +366,9 @@ exports.updateClock = (req, res) => {
     DataModulePopulate(Clock.findOne({ _id: req.body.id }))
       .then(async (data) => {
         if (data === null) {
+          if(req.body.id){
+            return res.status(400).send(errorMsg(520));
+          }
           let userData = new Clock();
           for (const [key, value] of Object.entries(req.body)) {
             if (["checkIn", "clockOut", "manager", "isPending", "task", "project"].includes(key)) {
@@ -534,7 +543,7 @@ exports.chats = (req, res) => {
           return res.status(404).send(errorMsg(520));
         }
         let pageData = data;
-        if(req.query.page){
+        if (req.query.page) {
           pageData = await paginationData(data, req.query.page);
         }
         const varData = commentsRemove(pageData);
@@ -553,7 +562,7 @@ exports.chats = (req, res) => {
 exports.reports = (req, res) => {
   try {
     DataModulePopulate(
-      Clock.find({"createdAt" : { $gte : new Date(req.query.date) }})
+      Clock.find({ $and: [{ "createdAt": { $gte: new Date(req.query.date) } }, { owner: req.query.id ? req.query.id : req.user._id }] })
     )
       .then(async (data) => {
         if (data === null) {

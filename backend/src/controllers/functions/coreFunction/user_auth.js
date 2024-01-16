@@ -16,7 +16,7 @@ const { fetchCredFromId } = require("./common_function");
 const { validate } = require("../../../models/regOtp");
 const { verifyUserOption } = require("../../../config/defaultConfig");
 
-const TokenGenaration = async (user, param, res) => {
+const TokenGenaration = async (user, param, res, type) => {
   try {
     const aToken = await tokenFunction.accessToken(user._id);
     const userId = user._id;
@@ -32,17 +32,16 @@ const TokenGenaration = async (user, param, res) => {
             if (tokenError) {
               return res.status(400).send(errorMsg(tokenError));
             }
-            return res.status(201).send(successMsg(token, 201));
+            return res.status(201).send(successMsg({ ...token._doc, type: type }, 201));
           });
         } else {
           usrdata.isLogin = true;
           usrdata.tokens = [{ access_token: aToken, refresh_token: refreshToken, user: user._id }];
-
           usrdata.save((usrTokenError, usrTokenData) => {
             if (usrTokenError) {
               return res.status(400).send(errorMsg(usrTokenError));
             }
-            return res.status(201).send(successMsg(usrdata, 201));
+            return res.status(201).send(successMsg({ ...usrdata._doc, type: type }, 201));
           });
         }
       })
@@ -160,7 +159,7 @@ const userTokenSave = (req, res) => {
             }
             removeKeyForReturn(user);
             // await sendWelcomeEmail(user.email , user.name);
-            return res.status(201).send(successMsg(tokendata, 201));
+            return res.status(201).send(successMsg({...tokendata._doc, type: req.body.type}, 201));
           });
         });
       })
@@ -239,7 +238,7 @@ exports.loginPasswordUser = async (req, res) => {
         }
         await removeKeyForReturn(user);
 
-        await TokenGenaration(user, { userId: user._id }, res);
+        await TokenGenaration(user, { userId: user._id }, res, req.body.type);
       })
       .catch((err) => {
         console.log(err)
