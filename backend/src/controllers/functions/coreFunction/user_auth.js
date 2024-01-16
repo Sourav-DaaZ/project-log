@@ -116,7 +116,7 @@ const userTokenSave = (req, res) => {
         }
         let user = new UserCred({
           ...varParamData,
-          ...req.body.manager && { manager: req.body.manager },
+          manager: req.user._id,
           password: req.body.password,
           type: toSmall(req.body.type),
         });
