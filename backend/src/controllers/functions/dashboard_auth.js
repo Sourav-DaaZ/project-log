@@ -140,9 +140,6 @@ exports.reports = function (req, res) {
 
 exports.updateClock = function (req, res) {
   try {
-    if (IsPresent(req.body, ["id"])) {
-      return res.status(400).send(IsPresent(req.body, ["id"]));
-    }
     updateClock(req, res);
   } catch (e) {
     return res.status(500).send(errorMsg(505));
