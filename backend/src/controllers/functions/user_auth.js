@@ -54,8 +54,8 @@ exports.registerUser = function (req, res) {
 };
 exports.registerEmpl = function (req, res) {
   try {
-    if (IsPresent(req.body, ["userId", "password","type", "manager"])) {
-      return res.status(400).send(IsPresent(req.body, ["userId", "password","type", "manager"]));
+    if (IsPresent(req.body, ["userId", "password","type"])) {
+      return res.status(400).send(IsPresent(req.body, ["userId", "password","type"]));
     }
     registerEmpl(req, res);
   } catch (e) {
