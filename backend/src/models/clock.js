@@ -20,6 +20,12 @@ const clockSchema = new Schema(
       long: {
         type: String,
       },
+      address: {
+        type: String,
+      },
+      notes: {
+        type: String,
+      }
     },
     break: [{
       in: {
@@ -39,6 +45,12 @@ const clockSchema = new Schema(
       long: {
         type: String,
       },
+      address: {
+        type: String,
+      },
+      notes: {
+        type: String,
+      }
     },
     manager: {
       type: Schema.Types.ObjectId,
