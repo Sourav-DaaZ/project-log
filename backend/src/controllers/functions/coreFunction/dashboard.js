@@ -42,18 +42,7 @@ exports.userInfo = (req, res) => {
         if (data === null) {
           return res.status(400).send(errorMsg(520));
         } else {
-          if (data?.userInfo) {
-            let varData = data.userInfo;
-            varData._doc.type = data.type;
-            varData._doc.email = data.email;
-            varData._doc.userId = data.userId;
-            return res.status(200).send(successMsg(varData, 201));
-          } else {
-            var varData = {};
-            varData.user = data._id;
-            varData.type = data.type;
-            return res.status(200).send(successMsg(varData, 201));
-          }
+          return res.status(200).send(successMsg(data, 201));
         }
       })
       .catch((err) => {
@@ -450,23 +439,7 @@ exports.searchUser = (req, res) => {
         if (data === null) {
           return res.status(400).send(errorMsg(520));
         } else {
-          let UData = [];
-          data?.map((x, i) => {
-            let varData = {};
-            if (x?.userInfo) {
-              varData = x.userInfo;
-              varData._doc.type = x.type;
-              varData._doc.userId = x.userId;
-              varData._doc.manager = x.manager;
-              varData._doc.email = x.email;
-            } else {
-              varData.user = x._id;
-              varData.type = x.type;
-              varData.manager = x.manager;
-            }
-            UData.push(varData);
-          })
-          return await res.status(200).send(successMsg(UData, 201));
+          return await res.status(200).send(successMsg(data, 201));
         }
       })
       .catch((err) => {
@@ -562,7 +535,7 @@ exports.chats = (req, res) => {
 exports.reports = (req, res) => {
   try {
     DataModulePopulate(
-      Clock.find({ $and: [{ "createdAt": { $gte: new Date(req.query.date) } }, { owner: req.query.id ? req.query.id : req.user._id }] })
+      Clock.find({ $and: [{ "createdAt": { $gte: new Date(req.query.sDate), $lt: new Date(req.query.eDate)} }, { owner: req.query.id ? req.query.id : req.user._id }] })
     )
       .then(async (data) => {
         if (data === null) {

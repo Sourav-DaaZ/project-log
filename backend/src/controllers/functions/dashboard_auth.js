@@ -119,8 +119,8 @@ exports.updateProject = function (req, res) {
 
 exports.updateTask = function (req, res) {
   try {
-    if (!req.body.id && IsPresent(req.body, ["assignedTo", "project"])) {
-      return res.status(400).send(IsPresent(req.body, ["id","assignedTo", "project"]));
+    if (!req.body.id && IsPresent(req.body, ["project"])) {
+      return res.status(400).send(IsPresent(req.body, ["id","project"]));
     }
     updateTask(req, res);
   } catch (e) {
