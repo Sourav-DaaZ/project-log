@@ -301,7 +301,7 @@ exports.updateTask = (req, res) => {
           }
           let userData = new Task();
           for (const [key, value] of Object.entries(req.body)) {
-            if (["name", "details", "project", "assignedTo", "status"].includes(key)) {
+            if (["name", "details", "project", "assignedTo", "status", "shift"].includes(key)) {
               userData[key] = value;
             } else if (req?.body?.image && key === "image") {
               let dataVal = '';
@@ -322,7 +322,7 @@ exports.updateTask = (req, res) => {
           });
         } else {
           for (const [key, value] of Object.entries(req.body)) {
-            if (["name", "details", "project", "assignedTo", "status"].includes(key)) {
+            if (["name", "details", "project", "assignedTo", "status", "shift"].includes(key)) {
               data[key] = value;
             } else if (req?.body?.image && key === "image") {
               let dataVal = '';
