@@ -329,6 +329,13 @@ exports.updateToFile = async (name, image, isUpadted) => {
     return "";
   }
 };
+exports.isValidDate = async (date) => {
+  try{
+    return new Date(date) instanceof Date && isFinite(new Date(date))
+  } catch (err) {
+    return false;
+  }
+};
 
 exports.isValidObjectId = isValidObjectId;
 exports.getRandomFileName = getRandomFileName;

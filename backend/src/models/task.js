@@ -19,6 +19,9 @@ const taskSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "UserCred"
     },
+    shift: {
+      type: Date
+    },
     name: {
       type: String,
       trim: true,

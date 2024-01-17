@@ -129,8 +129,11 @@ exports.updateTask = function (req, res) {
 };
 exports.reports = function (req, res) {
   try {
-    if (IsPresent(req.query, ["date"])) {
-      return res.status(400).send(IsPresent(req.query, ["date"]));
+    if (IsPresent(req.query, ["sDate", "eDate"])) {
+      return res.status(400).send(IsPresent(req.query, ["sDate", "eDate"]));
+    }
+    if(!(utils.isValidDate(req.query.sDate) && utils.isValidDate(req.query.eDate))){
+      return res.status(400).send(errorMsg('invalid date'));
     }
     reports(req, res);
   } catch (e) {

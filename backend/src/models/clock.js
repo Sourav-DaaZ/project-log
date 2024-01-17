@@ -12,7 +12,7 @@ const clockSchema = new Schema(
     },
     checkIn: {
       time: {
-        type: String,
+        type: Date,
       },
       lat: {
         type: String,
@@ -29,15 +29,15 @@ const clockSchema = new Schema(
     },
     break: [{
       in: {
-        type: String
+        type: Date
       },
       out: {
-        type: String
+        type: Date
       }
     }],
     clockOut: {
       time: {
-        type: String,
+        type: Date,
       },
       lat: {
         type: String,

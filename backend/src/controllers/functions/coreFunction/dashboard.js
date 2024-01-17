@@ -5,7 +5,7 @@ const Clock = require("../../../models/clock");
 const UserCred = require("../../../models/userCred");
 const Notification = require("../../../models/notification");
 const FirebaseToken = require("../../../models/firebaseToken");
-const { DataModule, errorMsg, successMsg, removeKeyForReturn, DataModulePopulate, paginationData, updateToFile, getRandomFileName } = require("../../../utils");
+const { DataModule, errorMsg, successMsg, removeKeyForReturn, DataModulePopulate, paginationData, updateToFile, getRandomFileName, isValidDate } = require("../../../utils");
 const { userNotification } = require("../../../services/notifications");
 const ChatComments = require("../../../models/chatComments");
 
@@ -237,7 +237,7 @@ exports.updateProject = (req, res) => {
     DataModulePopulate(Project.findOne({ _id: req.body.id }))
       .then(async (data) => {
         if (data === null) {
-          if(req.body.id){
+          if (req.body.id) {
             return res.status(400).send(errorMsg(520));
           }
           let userData = new Project();
@@ -296,7 +296,7 @@ exports.updateTask = (req, res) => {
     DataModulePopulate(Task.findOne({ _id: req.body.id }))
       .then(async (data) => {
         if (data === null) {
-          if(req.body.id){
+          if (req.body.id) {
             return res.status(400).send(errorMsg(520));
           }
           let userData = new Task();
@@ -355,7 +355,7 @@ exports.updateClock = (req, res) => {
     DataModulePopulate(Clock.findOne({ _id: req.body.id }))
       .then(async (data) => {
         if (data === null) {
-          if(req.body.id){
+          if (req.body.id) {
             return res.status(400).send(errorMsg(520));
           }
           let userData = new Clock();
@@ -535,25 +535,30 @@ exports.chats = (req, res) => {
 exports.reports = (req, res) => {
   try {
     DataModulePopulate(
-      Clock.find({ $and: [{ "createdAt": { $gte: new Date(req.query.sDate), $lt: new Date(req.query.eDate)} }, { owner: req.query.id ? req.query.id : req.user._id }] })
+      Clock.find({ $and: [{ "checkIn.time": { 
+        $gte: req.query.sDate
+        ,$lte: req.query.eDate 
+      }}, { owner: req.query.id ? req.query.id : req.user._id }] })
     )
       .then(async (data) => {
         if (data === null) {
           return res.status(404).send(errorMsg(520));
         }
         data?.map((x, i) => {
-          let varTime = new Date(x?.clockOut?.time) - new Date(x?.checkIn?.time);
+          let varTime = (isValidDate(x?.clockOut?.time) ? new Date(x?.clockOut?.time) : 0) - (isValidDate(x?.checkIn?.time) ? new Date(x?.checkIn?.time) : 0);
           x?.break?.map((y, i) => {
-            varTime = varTime - (new Date(y?.out) - new Date(y?.in))
+            varTime = varTime - ((isValidDate(y?.out) ? new Date(y?.out) : 0) - (isValidDate(y?.in) ? new Date(y?.in) : 0))
           })
           x._doc.workHr = Math.ceil(Number(varTime) / (1000 * 60 * 60 * 24));
         })
         return res.status(200).send(successMsg(data, 204));
       })
       .catch((err) => {
+        console.log(err)
         return res.status(500).send(errorMsg(err));
       });
   } catch (e) {
+    console.log(e)
     return res.status(500).send(errorMsg(e));
   }
 };
