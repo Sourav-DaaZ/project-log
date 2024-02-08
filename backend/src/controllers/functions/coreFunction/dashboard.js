@@ -414,11 +414,11 @@ exports.updateClock = (req, res) => {
               data[key] = varVal
             }
           }
-          data.save((dErr) => {
+          data.save((dErr, sdata) => {
             if (dErr) {
               return res.status(400).send(errorMsg(dErr));
             }
-            return res.status(200).send(successMsg(undefined, 204));
+            return res.status(200).send(successMsg({id: sdata._id}, 204));
           });
         }
       })
@@ -433,7 +433,11 @@ exports.updateClock = (req, res) => {
 exports.searchUser = (req, res) => {
   try {
     DataModulePopulate(UserCred.find(req.query.id ? { manager: req.query.id } : {}).populate({
-      path: 'userInfo'
+      path: 'userInfo',
+      populate: {
+        path: "user",
+        select: "userId email manager type",
+      },
     }))
       .then(async (data) => {
         if (data === null) {
