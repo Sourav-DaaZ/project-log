@@ -131,7 +131,7 @@ const userTokenSave = (req, res) => {
             let infoData = new UserInfo({
               ...req.body,
               user: savedData._id,
-              name: savedData.phone
+              name: savedData.name
             });
             infoData.save((infoError, savedInfo) => {
               if (infoError) {
